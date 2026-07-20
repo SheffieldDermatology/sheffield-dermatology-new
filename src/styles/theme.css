@@ -296,14 +296,21 @@ h2 em,
 .hero-circle-main {
   inset: 6% 6% 6% 6%;
   background:
-    radial-gradient(circle at 30% 25%, #cdeefb, var(--sky) 78%);
+    radial-gradient(circle at 32% 26%, #dff3fc 0%, #9bdaf3 40%, var(--sky) 72%, var(--sky-deep) 100%);
   overflow: hidden;
   box-shadow: 0 30px 70px rgba(47, 159, 208, 0.3);
+  display: grid;
+  place-items: center;
 }
-.hero-circle-main img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.hero-motif {
+  width: 62%;
+  height: 62%;
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.55);
+  stroke-width: 1.4;
+}
+.hero-motif circle:nth-child(1) {
+  stroke: rgba(255, 255, 255, 0.35);
 }
 .hero-circle-ring {
   inset: 0;
@@ -459,6 +466,9 @@ h2 em,
 .portrait-ring img {
   position: relative;
   width: 78%;
+  /* Source headshot is 455px wide — never render it larger, so it stays sharp. */
+  max-width: 420px;
+  height: auto;
   border-radius: 24px;
   z-index: 2;
   box-shadow: 0 24px 60px rgba(32, 36, 95, 0.22);

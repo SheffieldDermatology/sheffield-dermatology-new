@@ -60,13 +60,18 @@ export default async function HomePage() {
             </div>
           </div>
 
-          <div className="hero-circle-stack reveal delay-1" aria-hidden="true">
-            <div className="hero-glow-soft"></div>
-            <div className="hero-circle hero-circle-ring"></div>
-            <div className="hero-circle hero-circle-main">
-              <Image src={portrait} alt="" width={455} height={280} priority />
+          <div className="hero-circle-stack reveal delay-1">
+            <div className="hero-glow-soft" aria-hidden="true"></div>
+            <div className="hero-circle hero-circle-ring" aria-hidden="true"></div>
+            <div className="hero-circle hero-circle-main" aria-hidden="true">
+              <svg className="hero-motif" viewBox="0 0 200 200" aria-hidden="true">
+                <circle cx="100" cy="100" r="72" />
+                <circle cx="100" cy="100" r="52" />
+                <circle cx="100" cy="100" r="32" />
+                <path d="M100 40c0 40 0 80 0 120M40 100c40 0 80 0 120 0" />
+              </svg>
             </div>
-            <Link className="hero-circle hero-circle-coral" href="/book" aria-hidden="true" tabIndex={-1}>
+            <Link className="hero-circle hero-circle-coral" href="/book">
               Book your consultation today
             </Link>
           </div>
