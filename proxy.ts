@@ -17,7 +17,8 @@ export function proxy(request: NextRequest) {
     pathname.startsWith("/patient") &&
     !pathname.startsWith("/patient/sign-in") &&
     !pathname.startsWith("/patient/register") &&
-    !pathname.startsWith("/patient/reset");
+    !pathname.startsWith("/patient/reset") &&
+    !pathname.startsWith("/patient/verify");
   const isStaffArea = pathname.startsWith("/staff") && !pathname.startsWith("/staff/sign-in");
   const isAdminArea = pathname.startsWith("/admin");
 

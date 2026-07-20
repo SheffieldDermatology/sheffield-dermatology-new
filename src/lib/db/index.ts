@@ -14,7 +14,13 @@ import fs from "node:fs";
 import * as schema from "./schema";
 import { env, assertProductionDatabase } from "@/lib/env";
 
-export type Db = NodePgDatabase<typeof schema> | PgliteDatabase<typeof schema>;
+/**
+ * One canonical database type for the whole app. Both drivers expose an
+ * identical query API; typing every caller against a single concrete type
+ * (rather than a union) avoids method-overload resolution failures at call
+ * sites. The pglite instance is structurally compatible and cast to match.
+ */
+export type Db = NodePgDatabase<typeof schema>;
 
 // Next.js dev re-evaluates modules across compilations; keep one connection.
 const globalForDb = globalThis as unknown as { __sheffDb?: Db };
@@ -27,7 +33,7 @@ function createDb(): Db {
   }
   const dataDir = path.join(process.cwd(), "var", "dev-db");
   fs.mkdirSync(dataDir, { recursive: true });
-  return drizzlePglite(dataDir, { schema });
+  return drizzlePglite(dataDir, { schema }) as unknown as Db;
 }
 
 export function getDb(): Db {
@@ -37,9 +43,13 @@ export function getDb(): Db {
   return globalForDb.__sheffDb;
 }
 
-/** Test helper: fresh in-memory PGlite database (caller runs migrations). */
-export function createTestDb(): PgliteDatabase<typeof schema> {
-  return drizzlePglite("memory://", { schema });
+/**
+ * Test helper: fresh in-memory PGlite database (caller runs migrations).
+ * Returns the real pglite handle for the migrator, plus the unified Db view.
+ */
+export function createTestDb(): { db: Db; raw: PgliteDatabase<typeof schema> } {
+  const raw = drizzlePglite("memory://", { schema });
+  return { db: raw as unknown as Db, raw };
 }
 
 export { schema };

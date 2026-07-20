@@ -24,6 +24,7 @@
     "next": "16.2.10",
     "otplib": "^13.4.1",
     "pg": "^8.22.0",
+    "qrcode": "^1.5.4",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "zod": "^4.4.3"
@@ -32,6 +33,7 @@
     "@playwright/test": "^1.61.1",
     "@types/node": "^24.0.0",
     "@types/pg": "^8.15.0",
+    "@types/qrcode": "^1.5.6",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "drizzle-kit": "^0.31.10",

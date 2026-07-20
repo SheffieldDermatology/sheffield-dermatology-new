@@ -1,0 +1,97 @@
+/*
+ * Condition & treatment page styles.
+ *
+ * Imported only by pages under /conditions and /treatments — never from a
+ * layout. Extends the shared public.css/brand.css system and reuses its
+ * custom properties (navy ink, sky sage, coral accents, DM Sans/Newsreader)
+ * so the approved visual identity is preserved.
+ */
+
+/* ── Page header (reuses .hero for the brand background) ───────────────── */
+
+.hero.condition-hero { padding: 78px 0 84px; }
+.hero.condition-hero h1 { font-size: clamp(42px, 4.8vw, 64px); max-width: 15em; }
+.condition-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; font-size: 10px; text-transform: uppercase; letter-spacing: .12em; color: #747a98; margin-bottom: 30px; }
+.condition-breadcrumb a { color: var(--forest); font-weight: 700; text-decoration: none; }
+.condition-breadcrumb a:hover, .condition-breadcrumb a:focus-visible { text-decoration: underline; text-underline-offset: 3px; }
+
+/* ── Section rhythm ────────────────────────────────────────────────────── */
+
+.condition-section { padding: 84px 0; }
+.band-mist { background: var(--mist); }
+.band-cream { background: var(--cream); }
+.band-paper { background: var(--paper); }
+
+.condition-heading { max-width: 740px; margin-bottom: 44px; }
+.condition-heading h2 { font-size: clamp(32px, 3.6vw, 46px); margin: 14px 0 18px; }
+.condition-heading p { color: #646b88; font-size: 16px; line-height: 1.75; margin: 0; }
+
+.condition-body { max-width: 780px; }
+.condition-body p { color: #565d84; font-size: 15px; line-height: 1.8; margin: 0 0 18px; }
+.condition-body ul { margin: 0 0 18px; padding-left: 20px; }
+.condition-body li { color: #565d84; font-size: 15px; line-height: 1.7; margin: 7px 0; }
+.condition-body strong { color: var(--ink); }
+
+/* ── "What this covers" grid ───────────────────────────────────────────── */
+
+.covers-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 1px solid var(--line); border-left: 1px solid var(--line); }
+.covers-grid article { background: var(--paper); border-right: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 26px 28px; transition: background .3s; }
+.covers-grid article:hover { background: var(--mist); }
+.covers-grid h3 { font-family: var(--serif); font-weight: 500; font-size: 22px; line-height: 1.2; margin: 0 0 10px; }
+.covers-grid p { font-size: 13px; line-height: 1.65; color: #646b88; margin: 0; }
+
+/* ── Signs list (mole page ABCDE etc.) ─────────────────────────────────── */
+
+.signs-list { max-width: 860px; border-top: 1px solid var(--line); }
+.signs-list > div { display: grid; grid-template-columns: 60px 170px minmax(0, 1fr); gap: 20px; align-items: baseline; padding: 20px 0; border-bottom: 1px solid var(--line); }
+.signs-list b { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1; color: var(--coral); }
+.signs-list strong { font-size: 12px; text-transform: uppercase; letter-spacing: .1em; color: var(--ink); }
+.signs-list p { margin: 0; font-size: 14px; line-height: 1.65; color: #565d84; }
+
+/* ── Urgent-help callout ───────────────────────────────────────────────── */
+
+.urgent-callout { max-width: 880px; background: #fbe8ee; border-left: 4px solid var(--coral); padding: 36px 40px; }
+.urgent-callout .eyebrow { color: #a14458; }
+.urgent-callout .eyebrow > span { background: var(--coral); }
+.urgent-callout h2 { font-size: clamp(28px, 3.2vw, 40px); margin: 12px 0 16px; }
+.urgent-callout p { font-size: 14px; line-height: 1.75; color: #5c4653; margin: 0 0 16px; }
+.urgent-callout ul { margin: 0 0 18px; padding-left: 20px; }
+.urgent-callout li { font-size: 14px; line-height: 1.7; color: #5c4653; margin: 7px 0; }
+.urgent-callout strong { color: var(--ink); }
+.urgent-services { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin-top: 24px; }
+.urgent-services > div { background: var(--paper); border: 1px solid rgba(235, 143, 168, .45); padding: 18px 20px; }
+.urgent-services strong { display: block; font-size: 13px; color: var(--ink); margin-bottom: 5px; }
+.urgent-services span { display: block; font-size: 12px; line-height: 1.6; color: #646b88; }
+
+/* ── Related links ─────────────────────────────────────────────────────── */
+
+.related-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 6px; }
+.related-links a { text-decoration: none; border: 1px solid var(--line); background: var(--paper); color: var(--ink); font-size: 13px; font-weight: 600; padding: 14px 20px; transition: border-color .2s, background .2s, transform .2s; }
+.related-links a:hover, .related-links a:focus-visible { border-color: var(--sage); background: var(--mist); transform: translateY(-2px); }
+.related-links a span { color: var(--coral); margin-left: 10px; }
+
+/* ── Booking CTA panel ─────────────────────────────────────────────────── */
+
+.condition-cta { color: white; padding: 58px 54px; display: grid; grid-template-columns: minmax(0, 1.25fr) auto; gap: 44px; align-items: center; background: radial-gradient(circle at 88% 12%, rgba(80, 188, 232, .22), transparent 34%), linear-gradient(150deg, var(--forest-dark), var(--forest)); }
+.condition-cta h2 { color: white; font-size: clamp(32px, 3.6vw, 46px); margin: 12px 0 16px; }
+.condition-cta p { color: #c8d9ed; font-size: 14px; line-height: 1.75; max-width: 540px; margin: 0; }
+.condition-cta-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 18px; }
+.text-link.light { color: #cfe7f5; border-bottom-color: rgba(255, 255, 255, .45); }
+
+/* ── Discreet review note ──────────────────────────────────────────────── */
+
+.review-note { max-width: 780px; border-top: 1px solid var(--line); margin-top: 52px; padding-top: 18px; font-size: 11px; line-height: 1.75; color: #747a98; }
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+
+@media (max-width: 760px) {
+  .hero.condition-hero { padding: 56px 0 64px; }
+  .hero.condition-hero h1 { font-size: 42px; }
+  .condition-section { padding: 62px 0; }
+  .covers-grid { grid-template-columns: 1fr; }
+  .signs-list > div { grid-template-columns: 44px minmax(0, 1fr); }
+  .signs-list p { grid-column: 2; }
+  .urgent-callout { padding: 26px 22px; }
+  .urgent-services { grid-template-columns: 1fr; }
+  .condition-cta { grid-template-columns: 1fr; padding: 40px 28px; gap: 28px; }
+}

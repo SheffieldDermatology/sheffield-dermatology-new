@@ -1,0 +1,180 @@
+/* Centred auth card shared by patient and staff sign-in flows. */
+.auth-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  background:
+    radial-gradient(circle at 15% 15%, rgba(80, 188, 232, 0.14), transparent 32%),
+    radial-gradient(circle at 90% 80%, rgba(235, 143, 168, 0.1), transparent 30%),
+    linear-gradient(150deg, #fffafd, #eef8fd);
+}
+.auth-card {
+  width: min(440px, 100%);
+  background: #fffefe;
+  border: 1px solid rgba(32, 36, 95, 0.12);
+  border-radius: 18px;
+  box-shadow: 0 24px 70px rgba(32, 36, 95, 0.13);
+  padding: 38px 36px;
+}
+.auth-card-wide {
+  width: min(560px, 100%);
+}
+.auth-logo {
+  display: block;
+  margin: 0 auto 6px;
+}
+.auth-card h1 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  margin: 18px 0 6px;
+  color: var(--ink, #20245f);
+}
+.auth-card > p {
+  color: #646b88;
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+.auth-shell form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.field-block label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink, #20245f);
+}
+.field-block input:not([type="checkbox"]),
+.field-block select,
+.field-block textarea {
+  border: 1px solid rgba(32, 36, 95, 0.25);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 15px;
+  background: #fff;
+  color: var(--ink, #20245f);
+}
+.field-block input:focus-visible,
+.field-block select:focus-visible,
+.field-block textarea:focus-visible {
+  outline: 3px solid rgba(80, 188, 232, 0.55);
+  outline-offset: 1px;
+  border-color: #50bce8;
+}
+.field-help {
+  color: #747a98;
+  font-size: 12px;
+}
+.field-error {
+  color: #a13a58;
+  font-size: 13px;
+  margin: 0;
+}
+.has-error input,
+.has-error select,
+.has-error textarea {
+  border-color: #d76c8d;
+}
+.checkbox-block .checkbox-label {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 400;
+  font-size: 13px;
+  color: #4a4f6e;
+}
+.checkbox-block input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  accent-color: #20245f;
+}
+.auth-shell .button {
+  border-radius: 10px;
+  background: var(--ink, #20245f);
+  justify-content: center;
+  gap: 10px;
+}
+.auth-links {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  text-align: center;
+}
+.auth-links a {
+  color: #2a7fa7;
+}
+.auth-back {
+  margin-top: 26px;
+  font-size: 13px;
+}
+.auth-back a {
+  color: #646b88;
+  text-decoration: none;
+}
+.auth-back a:hover {
+  text-decoration: underline;
+}
+.auth-demo-note {
+  margin-top: 18px;
+  font-size: 12px;
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: #fbe5ec;
+  color: #843f5b;
+}
+.mfa-secret-box {
+  background: #edf8fc;
+  border: 1px solid #bfe5f4;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px 0;
+  text-align: center;
+}
+.mfa-secret-box code {
+  display: block;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  word-break: break-all;
+  margin-top: 8px;
+  color: #143a5c;
+}
+.mfa-qr {
+  display: block;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 8px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 8px;
+}
+.recovery-codes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 16px 0;
+  padding: 0;
+  list-style: none;
+}
+.recovery-codes li {
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  background: #f4f6fb;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  padding: 8px 10px;
+  text-align: center;
+  letter-spacing: 0.08em;
+}

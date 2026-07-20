@@ -34,8 +34,10 @@ if (process.env.NODE_ENV === "production") {
 }
 
 const DEV_PASSWORD = "DevPassword123!";
-// Publicly-known RFC 6238 test secret — development sign-in only.
-const DEV_ADMIN_TOTP_SECRET = "JBSWY3DPEHPK3PXP";
+// Fixed 20-byte base32 secret — DEVELOPMENT sign-in convenience ONLY. Real
+// staff enrol their own authenticator on first sign-in; this never ships to
+// production (seeding is blocked there).
+const DEV_ADMIN_TOTP_SECRET = "JBSWY3DPEHPK3PXPJBSWY3DPEHPK3PXP";
 
 async function main() {
   const db = getDb();
