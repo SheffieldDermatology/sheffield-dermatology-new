@@ -4,8 +4,12 @@
  * shares: fonts, base element styles and generic application states.
  */
 :root {
-  --serif: var(--font-serif), "Newsreader", Georgia, serif;
-  --sans: var(--font-sans), "DM Sans", Arial, sans-serif;
+  /* Poppins drives headings and UI; body uses Poppins too for the rounded,
+     friendly feel of the reference design. The --serif token now maps to
+     Poppins so existing markup that referenced it inherits the new type. */
+  --heading: var(--font-heading), "Poppins", "DM Sans", Arial, sans-serif;
+  --serif: var(--font-heading), "Poppins", "DM Sans", Arial, sans-serif;
+  --sans: var(--font-heading), "Poppins", var(--font-sans), "DM Sans", Arial, sans-serif;
 }
 
 * {

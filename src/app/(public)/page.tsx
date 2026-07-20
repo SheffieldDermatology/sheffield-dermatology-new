@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { getClinicInfo } from "@/lib/clinic-info";
+import portrait from "../../../public/assets/dr-vinod-elangasinghe.jpg";
 
 export const metadata: Metadata = {
   title: "Sheffield Dermatology | Consultant-led skin care",
   description:
-    "Consultant-led private dermatology care in Sheffield. Request an appointment with Dr Vinod Elangasinghe for expert assessment of skin, hair and nail concerns.",
+    "Consultant-led private dermatology care in Sheffield for adults and children. Book an appointment with Dr Vinod Elangasinghe for expert assessment of skin, hair and nail concerns.",
   openGraph: {
     title: "Sheffield Dermatology | Consultant-led skin care",
     description:
@@ -16,42 +18,17 @@ export const metadata: Metadata = {
 };
 
 const SERVICES = [
-  {
-    slug: "mole-assessment",
-    number: "01",
-    title: "Moles & skin lesions",
-    copy: "Careful assessment of new, changing or concerning moles and other skin lesions.",
-    cta: "Request an assessment",
-    featured: true,
-  },
-  {
-    slug: "acne-rosacea",
-    number: "02",
-    title: "Acne & rosacea",
-    copy: "Individual treatment plans for breakouts, redness and sensitive skin.",
-    cta: "Request an appointment",
-  },
-  {
-    slug: "eczema-psoriasis",
-    number: "03",
-    title: "Eczema & psoriasis",
-    copy: "Specialist support for persistent, uncomfortable or complex inflammatory conditions.",
-    cta: "Request an appointment",
-  },
-  {
-    slug: "hair-scalp-nails",
-    number: "04",
-    title: "Hair, scalp & nails",
-    copy: "Assessment of hair loss, scalp symptoms and changes affecting the nails.",
-    cta: "Request an appointment",
-  },
-  {
-    slug: "general-dermatology",
-    number: "05",
-    title: "General dermatology",
-    copy: "Expert review of rashes, pigmentation and other adult skin concerns.",
-    cta: "Request an appointment",
-  },
+  { slug: "mole-assessment", number: "01", title: "Moles & skin lesions", copy: "Careful assessment of new, changing or concerning moles and other skin lesions.", featured: true },
+  { slug: "acne-rosacea", number: "02", title: "Acne & rosacea", copy: "Individual treatment plans for breakouts, redness and sensitive skin." },
+  { slug: "eczema-psoriasis", number: "03", title: "Eczema & psoriasis", copy: "Specialist support for persistent, uncomfortable or complex inflammatory conditions." },
+  { slug: "hair-scalp-nails", number: "04", title: "Hair, scalp & nails", copy: "Assessment of hair loss, scalp symptoms and changes affecting the nails." },
+  { slug: "general-dermatology", number: "05", title: "General dermatology", copy: "Expert review of rashes, pigmentation and other skin concerns, for adults and children." },
+];
+
+const ROUTES = [
+  { href: "/conditions/mole-assessment", title: "Worried about a mole?", cls: "route-card-a" },
+  { href: "/conditions/acne-rosacea", title: "Acne or rosacea?", cls: "route-card-b" },
+  { href: "/conditions/hair-scalp-nails", title: "Hair, scalp or nails?", cls: "route-card-c" },
 ];
 
 export default async function HomePage() {
@@ -59,24 +36,21 @@ export default async function HomePage() {
 
   return (
     <>
-      <section className="hero">
-        <div className="hero-glow hero-glow-one"></div>
-        <div className="hero-glow hero-glow-two"></div>
-        <div className="container hero-grid">
+      {/* ── Circle-motif hero ─────────────────────────────────────── */}
+      <section className="circle-hero">
+        <div className="container circle-hero-grid">
           <div className="hero-copy reveal">
             <div className="eyebrow">
               <span></span> Private dermatology · Sheffield
             </div>
             <h1>
-              Expert care,
-              <br />
-              <em>thoughtfully</em> delivered.
+              Expert skin care, <em>thoughtfully delivered.</em>
             </h1>
             <p className="hero-lead">
-              Clear answers and a considered plan for your skin, hair or nail concern—with every
-              consultation led by Dr Vinod Elangasinghe.
+              Clear answers and a considered plan for your skin, hair or nail concern — every
+              consultation led personally by Dr Vinod Elangasinghe, for adults and children.
             </p>
-            <div className="hero-actions">
+            <div className="circle-hero-actions">
               <Link className="button" href="/book">
                 Book an appointment <span aria-hidden="true">→</span>
               </Link>
@@ -84,67 +58,67 @@ export default async function HomePage() {
                 Explore our care <span aria-hidden="true">↓</span>
               </Link>
             </div>
-            <div className="hero-reassurance" aria-label="Clinic features">
-              <div>
-                <span className="check">✓</span>
-                <span>
-                  <strong>Consultant-led</strong>
-                  <small>Personalised assessment</small>
-                </span>
-              </div>
-              <div>
-                <span className="check">✓</span>
-                <span>
-                  <strong>Clear next steps</strong>
-                  <small>Time to ask questions</small>
-                </span>
-              </div>
-            </div>
           </div>
 
-          <div className="hero-visual reveal delay-1" aria-label="Sheffield Dermatology clinic illustration">
-            <div className="visual-frame">
-              <div className="visual-orbit orbit-one"></div>
-              <div className="visual-orbit orbit-two"></div>
-              <div className="skin-shape shape-one"></div>
-              <div className="skin-shape shape-two"></div>
-              <div className="skin-shape shape-three"></div>
-              <svg className="leaf-line" viewBox="0 0 260 410" aria-hidden="true">
-                <path d="M132 410c-2-103-12-183 13-269 13-44 38-82 78-113" />
-                <path d="M151 121c24-6 47 1 68 18-30 13-54 8-68-18Z" />
-                <path d="M134 189c-25-11-49-8-73 7 24 20 49 18 73-7Z" />
-                <path d="M137 260c26-7 49-1 69 16-29 14-53 9-69-16Z" />
-              </svg>
-              <div className="visual-label">
-                <span>01</span>
-                <p>Considered care for the skin you&rsquo;re in.</p>
-              </div>
+          <div className="hero-circle-stack reveal delay-1" aria-hidden="true">
+            <div className="hero-glow-soft"></div>
+            <div className="hero-circle hero-circle-ring"></div>
+            <div className="hero-circle hero-circle-main">
+              <Image src={portrait} alt="" width={455} height={280} priority />
             </div>
-            <div className="floating-card">
-              <span className="calendar-icon" aria-hidden="true">
-                ◇
-              </span>
-              <div>
-                <small>Appointments</small>
-                <strong>Book online</strong>
-              </div>
-              <Link href="/book" aria-label="Go to appointment booking">
-                →
-              </Link>
-            </div>
+            <Link className="hero-circle hero-circle-coral" href="/book" aria-hidden="true" tabIndex={-1}>
+              Book your consultation today
+            </Link>
           </div>
-        </div>
-        <div className="container trust-line">
-          <span>Professional details to be confirmed:</span>
-          <strong>GMC registration</strong>
-          <i></i>
-          <strong>Insurer recognition</strong>
-          <i></i>
-          <strong>Sheffield clinic</strong>
         </div>
       </section>
 
-      <section className="intro section" id="care">
+      {/* ── Route cards ───────────────────────────────────────────── */}
+      <section aria-label="Quick routes">
+        <div className="route-cards">
+          {ROUTES.map((r) => (
+            <Link key={r.href} className={`route-card ${r.cls}`} href={r.href}>
+              <span className="route-top" aria-hidden="true"></span>
+              <span className="route-chip">Book now</span>
+              <h3>{r.title}</h3>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Welcome + circular portrait ───────────────────────────── */}
+      <section className="welcome-band" id="doctor">
+        <div className="container welcome-grid">
+          <div className="reveal">
+            <p className="welcome-big">Welcome</p>
+            <p className="welcome-sub">to Sheffield Dermatology</p>
+            <p>
+              Established by Dr Vinod Elangasinghe, Sheffield Dermatology is a trusted destination
+              for the diagnosis and treatment of skin conditions and skin cancer across all age
+              groups. From the moment you arrive, your care is calm, unhurried and personal.
+            </p>
+            <p>
+              You will meet Dr Elangasinghe himself, who assesses your concern carefully and
+              explains your options in straightforward language — with time for your questions.
+            </p>
+            <p style={{ marginTop: "26px" }}>
+              <Link className="button" href="/about">
+                About Dr Elangasinghe <span aria-hidden="true">→</span>
+              </Link>
+            </p>
+          </div>
+          <div className="portrait-ring reveal delay-1">
+            <div className="ring-bg" aria-hidden="true"></div>
+            <Image src={portrait} alt="Dr Vinod Elangasinghe, Consultant Dermatologist" width={455} height={280} />
+            <Link className="ring-cta" href="/book">
+              Book your consultation
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Conditions grid ───────────────────────────────────────── */}
+      <section className="intro section" id="care" style={{ paddingTop: "40px" }}>
         <div className="container">
           <div className="section-heading reveal">
             <div>
@@ -153,14 +127,11 @@ export default async function HomePage() {
             </div>
             <div>
               <h2>
-                Your concerns,
-                <br />
-                <em>properly heard.</em>
+                Your concerns, <em>properly heard.</em>
               </h2>
               <p>
-                From a changing mole to a long-standing skin condition, your appointment begins
-                with listening. We assess the whole picture and explain your options in
-                straightforward language.
+                From a changing mole to a long-standing skin condition, your appointment begins with
+                listening. We assess the whole picture and explain your options plainly.
               </p>
             </div>
           </div>
@@ -185,18 +156,14 @@ export default async function HomePage() {
                   <h3>{service.title}</h3>
                   <p>{service.copy}</p>
                   <Link href={`/conditions/${service.slug}`}>
-                    {service.cta} <span>↗</span>
+                    Learn more <span>↗</span>
                   </Link>
                 </div>
               </article>
             ))}
             <article className="service-card service-all reveal delay-2">
               <p>Not sure which appointment you need?</p>
-              <Link
-                className="circle-link"
-                href="/contact"
-                aria-label="Contact us for help choosing an appointment"
-              >
+              <Link className="circle-link" href="/contact" aria-label="Contact us for help choosing an appointment">
                 →
               </Link>
             </article>
@@ -204,135 +171,40 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="doctor section" id="doctor">
-        <div className="container doctor-grid">
-          <div className="doctor-portrait reveal">
-            <div className="portrait-placeholder">
-              <span>Dr VE</span>
-              <small>
-                Professional portrait
-                <br />
-                to be added
-              </small>
-            </div>
-            <div className="portrait-caption">
-              <span>Consultant Dermatologist</span>
-              <i></i>
-              <span>Sheffield</span>
-            </div>
+      {/* ── Three big circle CTAs ─────────────────────────────────── */}
+      <section className="circle-cta-band">
+        <div className="container circle-cta-row">
+          <div className="circle-cta reveal">
+            <div className="circle solid">Ready to be seen?</div>
+            <p>Book a consultant-led appointment in Sheffield — in person or by video.</p>
+            <Link className="button" href="/book">
+              Book online
+            </Link>
           </div>
-          <div className="doctor-copy reveal delay-1">
-            <span className="eyebrow light">Meet your dermatologist</span>
-            <h2>
-              Care with clarity,
-              <br />
-              <em>from Dr Elangasinghe.</em>
-            </h2>
-            <p className="large-copy">
-              Every patient deserves to feel listened to, understood and confident about what
-              happens next.
-            </p>
-            <p>
-              Dr Vinod Elangasinghe provides thoughtful, evidence-informed dermatology
-              consultations for adults and children. Your appointment is unhurried, your concerns
-              are taken seriously, and your options are explained clearly.
-            </p>
-            <Link className="button button-light" href="/about">
-              About Dr Elangasinghe <span>→</span>
+          <div className="circle-cta reveal delay-1">
+            <div className="circle ringed">Have a question first?</div>
+            <p>Not sure which appointment you need? Ask the clinic team and we&rsquo;ll help.</p>
+            <Link className="button button-outline" href="/contact">
+              Contact us
+            </Link>
+          </div>
+          <div className="circle-cta reveal delay-2">
+            <div className="circle dark">Using insurance?</div>
+            <p>Dr Elangasinghe is recognised by Bupa. Check your cover before you book.</p>
+            <Link className="button button-outline" href="/insurance">
+              Insurance
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="journey section" id="patients">
-        <div className="container">
-          <div className="journey-heading reveal">
-            <span className="eyebrow">Your visit</span>
-            <h2>
-              A calm, clear path
-              <br />
-              <em>to better understanding.</em>
-            </h2>
-          </div>
-          <div className="steps">
-            <article className="step reveal">
-              <span>01</span>
-              <div className="step-icon">↗</div>
-              <h3>Book</h3>
-              <p>Choose the concern, date and time that suit you. We will confirm your appointment.</p>
-            </article>
-            <article className="step reveal delay-1">
-              <span>02</span>
-              <div className="step-icon">◎</div>
-              <h3>Consult</h3>
-              <p>
-                Meet Dr Vinod Elangasinghe for a detailed assessment, with time to discuss your
-                questions.
-              </p>
-            </article>
-            <article className="step reveal delay-2">
-              <span>03</span>
-              <div className="step-icon">⌁</div>
-              <h3>Plan</h3>
-              <p>Leave with an explanation and a personalised next-step plan, where appropriate.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="booking section" id="booking">
-        <div className="container booking-shell">
-          <div className="booking-intro">
-            <span className="eyebrow light">Appointments</span>
-            <h2>
-              Let&rsquo;s find a time
-              <br />
-              <em>that suits you.</em>
-            </h2>
-            <p>
-              Choose your appointment type, pick from genuine availability and receive
-              confirmation by email — or join the waiting list if nothing suits.
-            </p>
-            <div className="booking-assurance">
-              <span aria-hidden="true">✓</span>
-              <p>
-                <strong>No detailed medical history needed to book</strong>
-                <br />
-                Your private medical information is only ever shared through the secure patient
-                portal.
-              </p>
-            </div>
-          </div>
-          <div className="booking-panel">
-            <div className="form-heading">
-              <span>Online booking</span>
-              <h3>Start your booking</h3>
-            </div>
-            <p>
-              The booking journey takes about two minutes. You can choose an in-person visit in
-              Sheffield or a video consultation.
-            </p>
-            <p>
-              <Link className="button" href="/book">
-                Book an appointment <span aria-hidden="true">→</span>
-              </Link>
-            </p>
-            <p className="secure-note">
-              Prefer to talk first? <Link href="/contact">Contact the clinic</Link> and we will
-              help you choose the right appointment.
-            </p>
-          </div>
-        </div>
-      </section>
-
+      {/* ── Contact strip ─────────────────────────────────────────── */}
       <section className="contact section" id="contact">
         <div className="container contact-grid">
           <div>
             <span className="eyebrow">Get in touch</span>
             <h2>
-              Questions before
-              <br />
-              <em>you book?</em>
+              Questions before <em>you book?</em>
             </h2>
           </div>
           <div className="contact-details">
@@ -346,14 +218,16 @@ export default async function HomePage() {
             </div>
             <div>
               <small>Email</small>
-              {clinic.email ? <a href={`mailto:${clinic.email}`}>{clinic.email}</a> : <p>To be confirmed</p>}
+              {clinic.email ? <a href={`mailto:${clinic.email}`}>{clinic.email}</a> : <p>Use the contact form</p>}
             </div>
             <div>
               <small>Clinic</small>
-              {clinic.addressLines ? (
-                <p>{clinic.addressLines.join(", ")}</p>
+              {clinic.locations && clinic.locations[0] ? (
+                <p>
+                  {clinic.locations[0].name}, {clinic.locations[0].lines.join(", ")}
+                </p>
               ) : (
-                <p>Sheffield — full address to be confirmed</p>
+                <p>Sheffield — address to be confirmed</p>
               )}
             </div>
             <div>

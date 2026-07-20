@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
-import { DM_Sans, Newsreader } from "next/font/google";
+import { Poppins, DM_Sans } from "next/font/google";
 import "./globals.css";
+
+// Poppins — the friendly, rounded geometric sans used for headings and UI,
+// echoing the reference design. DM Sans is kept as the body/fallback sans.
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  variable: "--font-heading",
+  display: "swap",
+});
 
 const dmSans = DM_Sans({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  weight: ["400", "500"],
-  style: ["normal", "italic"],
-  variable: "--font-serif",
   display: "swap",
 });
 
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="en-GB"
       data-scroll-behavior="smooth"
-      className={`${dmSans.variable} ${newsreader.variable}`}
+      className={`${poppins.variable} ${dmSans.variable}`}
     >
       <body>{children}</body>
     </html>

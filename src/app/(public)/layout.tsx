@@ -1,5 +1,6 @@
 import "@/styles/public.css";
 import "@/styles/brand.css";
+import "@/styles/theme.css";
 import SiteHeader from "@/components/public/SiteHeader";
 import SiteFooter from "@/components/public/SiteFooter";
 import CookieBanner from "@/components/public/CookieBanner";
