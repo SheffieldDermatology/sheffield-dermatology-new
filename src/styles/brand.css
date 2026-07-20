@@ -1,0 +1,178 @@
+:root {
+  --ink: #20245f;
+  --ink-2: #343b78;
+  --forest: #24276d;
+  --forest-dark: #181b51;
+  --sage: #50bce8;
+  --sage-light: #d9f1fb;
+  --mist: #edf8fc;
+  --cream: #faf7fb;
+  --paper: #fffefe;
+  --coral: #eb8fa8;
+  --line: rgba(32, 36, 95, .15);
+  --shadow: 0 24px 70px rgba(32, 36, 95, .13);
+}
+
+::selection {
+  color: #fff;
+  background: #2eace0;
+}
+
+:focus-visible {
+  outline: 3px solid rgba(80, 188, 232, .55);
+  outline-offset: 3px;
+}
+
+.notice-bar {
+  background: linear-gradient(90deg, #20245f, #28377d);
+}
+
+.site-header {
+  background: rgba(255, 254, 254, .95);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 12% 20%, rgba(235, 143, 168, .12), transparent 25%),
+    linear-gradient(135deg, #fffafd, #eef8fd);
+}
+
+.hero-lead,
+.section-heading p,
+.service-card p,
+.step p,
+.contact-details p {
+  color: #646b88;
+}
+
+.visual-frame {
+  background: linear-gradient(145deg, #cef1fc 0%, #72ccef 55%, #4cb6e3 100%);
+}
+
+.visual-frame::before {
+  border-color: rgba(255, 255, 255, .72);
+}
+
+.visual-frame::after {
+  background: rgba(255, 255, 255, .3);
+}
+
+.visual-orbit {
+  border-color: rgba(32, 36, 95, .2);
+}
+
+.skin-shape {
+  background: rgba(235, 143, 168, .78);
+}
+
+.shape-two {
+  background: rgba(255, 255, 255, .48);
+}
+
+.shape-three {
+  background: rgba(38, 43, 112, .3);
+}
+
+.leaf-line {
+  fill: rgba(255, 255, 255, .14);
+  stroke: rgba(32, 36, 95, .62);
+}
+
+.hero-reassurance small,
+.trust-line,
+.content-note {
+  color: #747a98;
+}
+
+.check {
+  background: #d9f1fb;
+  color: #222667;
+}
+
+.service-card:hover,
+.service-all {
+  background: #edf8fc;
+}
+
+.service-card.featured {
+  background: linear-gradient(145deg, #20245f, #2a4389);
+}
+
+.service-icon span {
+  border-color: rgba(112, 207, 241, .8);
+}
+
+.doctor {
+  background:
+    radial-gradient(circle at 15% 35%, rgba(80, 188, 232, .14), transparent 29%),
+    linear-gradient(135deg, #171a50, #282c78);
+}
+
+.portrait-placeholder {
+  background: linear-gradient(145deg, #beeafb, #55bae6 54%, #30387e);
+}
+
+.portrait-caption,
+.doctor-copy > p:not(.large-copy),
+.eyebrow.light {
+  color: #bedff0;
+}
+
+.doctor-copy .large-copy {
+  color: #f5f7ff;
+}
+
+.credentials span {
+  color: #a8d7ec;
+}
+
+.journey {
+  background: linear-gradient(180deg, #faf7fb, #f1f8fc);
+}
+
+.booking {
+  background: #e8f4fa;
+}
+
+.booking-intro {
+  background:
+    radial-gradient(circle at 90% 10%, rgba(80, 188, 232, .22), transparent 32%),
+    linear-gradient(150deg, #20245f, #272d77);
+}
+
+.booking-intro p,
+.booking-assurance p {
+  color: #c8d9ed;
+}
+
+.demo-badge {
+  border-color: rgba(235, 143, 168, .72);
+  color: #ffc3d3;
+}
+
+.choice-card:hover {
+  border-color: #50bce8;
+  background: #f4fbfe;
+}
+
+.choice-card:has(input:checked),
+.success-note {
+  background: #edf8fc;
+}
+
+.contact {
+  background: linear-gradient(135deg, #fffefe, #fff8fb);
+}
+
+.medical-note {
+  background: #fbe8ee;
+}
+
+.site-footer {
+  background: linear-gradient(135deg, #171a50, #222769);
+}
+
+.cookie-banner {
+  border-left-color: #50bce8;
+  box-shadow: 0 12px 50px rgba(32, 36, 95, .22);
+}

@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Staff Workspace | Sheffield Dermatology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="portal.css">
+  <link rel="stylesheet" href="portal-logo.css">
+</head>
+<body>
+  <div class="portal-notice" role="status">
+    <span>Prototype mode</span> No real patient information is loaded or stored here.
+  </div>
+
+  <aside class="sidebar" aria-label="Staff workspace navigation">
+    <a class="portal-brand" href="index.html" aria-label="Return to Sheffield Dermatology website">
+      <img src="assets/sheffield-dermatology-logo.png" alt="Sheffield Dermatology">
+    </a>
+
+    <nav class="portal-nav">
+      <span class="nav-label">Workspace</span>
+      <button class="nav-item active" type="button" data-view="overview"><i>⌂</i><span>Overview</span></button>
+      <button class="nav-item" type="button" data-view="calendar"><i>□</i><span>Calendar</span><b>8</b></button>
+      <button class="nav-item" type="button" data-view="patients"><i>♙</i><span>Patients</span></button>
+      <button class="nav-item" type="button" data-view="scribe"><i>◉</i><span>AI Scribe</span><em>AI</em></button>
+      <button class="nav-item" type="button" data-view="documents"><i>▱</i><span>Team files</span></button>
+      <button class="nav-item" type="button" data-view="messages"><i>◇</i><span>Messages</span><b>3</b></button>
+      <button class="nav-item" type="button" data-view="tasks"><i>✓</i><span>Tasks</span><b>5</b></button>
+      <span class="nav-label">Practice</span>
+      <button class="nav-item" type="button" data-view="billing"><i>£</i><span>Billing</span></button>
+      <button class="nav-item" type="button" data-view="reports"><i>⌁</i><span>Reports</span></button>
+      <button class="nav-item" type="button" data-view="settings"><i>⚙</i><span>Settings</span></button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-avatar">DE</div>
+      <div><strong>Dr Elangasinghe</strong><small>Consultant · Preview</small></div>
+      <button type="button" aria-label="Open account menu">•••</button>
+    </div>
+  </aside>
+
+  <main class="portal-main">
+    <header class="topbar">
+      <button class="sidebar-toggle" type="button" aria-label="Toggle navigation">☰</button>
+      <label class="search"><span>⌕</span><input type="search" placeholder="Search patients, files and tasks" aria-label="Search workspace"><kbd>⌘ K</kbd></label>
+      <div class="topbar-actions">
+        <span class="system-status"><i></i> Systems connected</span>
+        <button class="icon-button" type="button" aria-label="Notifications">♢<b>2</b></button>
+        <a class="new-button" href="#quick-action">+ New</a>
+      </div>
+    </header>
+
+    <section class="workspace-view active" id="overview" data-title="Overview">
+      <div class="welcome-row">
+        <div><span class="overline">Monday, 20 July</span><h1>Good morning, Dr Elangasinghe.</h1><p>Here is what is happening across the clinic today.</p></div>
+        <div class="welcome-actions"><button type="button" class="secondary-button">View calendar</button><button type="button" class="primary-button" data-open-scribe><span>●</span> Start consultation</button></div>
+      </div>
+
+      <div class="metric-grid">
+        <article class="metric"><div class="metric-icon teal">□</div><div><span>Appointments today</span><strong>8</strong><small><i class="up">↑ 2</i> from last Monday</small></div></article>
+        <article class="metric"><div class="metric-icon coral">♙</div><div><span>Patients waiting</span><strong>2</strong><small>Next: 10:30</small></div></article>
+        <article class="metric"><div class="metric-icon gold">✓</div><div><span>Open tasks</span><strong>5</strong><small><i>2</i> due today</small></div></article>
+        <article class="metric"><div class="metric-icon blue">◇</div><div><span>Unread messages</span><strong>3</strong><small>1 marked urgent</small></div></article>
+      </div>
+
+      <div class="dashboard-grid">
+        <section class="panel schedule-panel">
+          <div class="panel-heading"><div><h2>Today’s schedule</h2><span>8 appointments · 6h 15m</span></div><button type="button" data-view-link="calendar">View full calendar →</button></div>
+          <div class="current-line"><span>Now</span><i></i></div>
+          <div class="appointment complete"><time>09:00<small>30 min</small></time><span class="appointment-dot"></span><div class="patient-avatar sage">AR</div><div class="appointment-copy"><strong>Patient AR <small>Completed</small></strong><span>Mole assessment · In person</span></div><button type="button">•••</button></div>
+          <div class="appointment active"><time>10:30<small>45 min</small></time><span class="appointment-dot"></span><div class="patient-avatar peach">JM</div><div class="appointment-copy"><strong>Patient JM <small>Next</small></strong><span>Acne review · In person</span></div><button type="button" data-open-scribe>Start notes →</button></div>
+          <div class="appointment"><time>11:30<small>30 min</small></time><span class="appointment-dot"></span><div class="patient-avatar lilac">SK</div><div class="appointment-copy"><strong>Patient SK</strong><span>Follow-up · Video</span></div><button type="button">•••</button></div>
+          <div class="appointment"><time>13:30<small>45 min</small></time><span class="appointment-dot"></span><div class="patient-avatar blue">LT</div><div class="appointment-copy"><strong>Patient LT</strong><span>General dermatology · In person</span></div><button type="button">•••</button></div>
+          <div class="appointment"><time>14:45<small>30 min</small></time><span class="appointment-dot"></span><div class="patient-avatar sand">RP</div><div class="appointment-copy"><strong>Patient RP</strong><span>Hair loss review · Video</span></div><button type="button">•••</button></div>
+        </section>
+
+        <div class="right-stack">
+          <section class="panel tasks-panel">
+            <div class="panel-heading"><div><h2>Tasks</h2><span>2 due today</span></div><button type="button">+ Add task</button></div>
+            <label class="task urgent"><input type="checkbox"><span></span><div><strong>Review pathology result</strong><small>Patient SK · Due 11:00</small></div><em>Urgent</em></label>
+            <label class="task"><input type="checkbox"><span></span><div><strong>Approve clinic letter</strong><small>Patient AR · Due today</small></div></label>
+            <label class="task"><input type="checkbox"><span></span><div><strong>Insurance pre-authorisation</strong><small>Patient LT · Tomorrow</small></div></label>
+            <button class="panel-footer-button" type="button" data-view-link="tasks">View all 5 tasks →</button>
+          </section>
+
+          <section class="panel quick-panel" id="quick-action">
+            <div class="panel-heading"><div><h2>Quick actions</h2><span>Common clinic workflows</span></div></div>
+            <div class="quick-grid">
+              <button type="button"><i>♙</i><span>New patient</span></button>
+              <button type="button"><i>□</i><span>Book visit</span></button>
+              <button type="button" data-open-scribe><i class="record">●</i><span>Start scribe</span></button>
+              <button type="button" data-view-link="documents"><i>▱</i><span>Upload file</span></button>
+            </div>
+          </section>
+
+          <section class="integration-card">
+            <div class="integration-logos"><span class="semble-logo">S</span><i>+</i><span class="heidi-logo">h</span></div>
+            <div><strong>Semble + Heidi</strong><p>Clinical records and AI notes, connected through approved provider integrations.</p></div>
+            <span class="connected">Connected</span>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace-view" id="calendar" data-title="Calendar">
+      <div class="page-heading"><div><span class="overline">Clinic schedule</span><h1>Calendar</h1><p>Appointments shown here are fictional demonstration data.</p></div><button class="primary-button">+ New appointment</button></div>
+      <div class="panel calendar-shell">
+        <div class="calendar-toolbar"><button>←</button><strong>20–24 July 2026</strong><button>→</button><div><button class="selected">Week</button><button>Day</button></div></div>
+        <div class="week-grid">
+          <div class="time-column"><span></span><time>09:00</time><time>10:00</time><time>11:00</time><time>12:00</time><time>13:00</time><time>14:00</time><time>15:00</time><time>16:00</time></div>
+          <div class="day-column today"><header><small>Mon</small><strong>20</strong></header><div class="cal-event green" style="--top:20px;--height:70px"><strong>Mole assessment</strong><span>09:00 · Patient AR</span></div><div class="cal-event coral" style="--top:110px;--height:92px"><strong>Acne review</strong><span>10:30 · Patient JM</span></div><div class="cal-event blue" style="--top:290px;--height:70px"><strong>General derm.</strong><span>13:30 · Patient LT</span></div></div>
+          <div class="day-column"><header><small>Tue</small><strong>21</strong></header><div class="cal-event blue" style="--top:50px;--height:70px"><strong>Video follow-up</strong><span>09:30 · Patient CE</span></div><div class="cal-event green" style="--top:230px;--height:92px"><strong>New consultation</strong><span>12:30 · Patient BW</span></div></div>
+          <div class="day-column"><header><small>Wed</small><strong>22</strong></header><div class="cal-event coral" style="--top:80px;--height:70px"><strong>Acne review</strong><span>10:00 · Patient NT</span></div><div class="cal-event green" style="--top:350px;--height:70px"><strong>Mole assessment</strong><span>14:30 · Patient MH</span></div></div>
+          <div class="day-column"><header><small>Thu</small><strong>23</strong></header><div class="cal-event blue" style="--top:140px;--height:92px"><strong>Hair consultation</strong><span>11:00 · Patient PJ</span></div></div>
+          <div class="day-column"><header><small>Fri</small><strong>24</strong></header><div class="cal-event green" style="--top:20px;--height:70px"><strong>New consultation</strong><span>09:00 · Patient FB</span></div><div class="cal-event coral" style="--top:290px;--height:70px"><strong>Rosacea review</strong><span>13:30 · Patient DS</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="workspace-view" id="patients" data-title="Patients">
+      <div class="page-heading"><div><span class="overline">Clinical records</span><h1>Patients</h1><p>In production, records should be read from the approved EHR—not duplicated in the website.</p></div><button class="primary-button">+ Add patient</button></div>
+      <div class="panel table-panel">
+        <div class="table-tools"><label class="search table-search"><span>⌕</span><input placeholder="Search patient records"></label><button>Filter</button><button>Export</button></div>
+        <table><thead><tr><th>Patient</th><th>Last appointment</th><th>Next appointment</th><th>Pathway</th><th>Status</th><th></th></tr></thead><tbody>
+          <tr><td><div class="person"><span class="patient-avatar sage">AR</span><div><strong>Patient AR</strong><small>Demo ID · 10021</small></div></div></td><td>20 Jul 2026</td><td>—</td><td>Mole assessment</td><td><span class="status complete">Completed</span></td><td>•••</td></tr>
+          <tr><td><div class="person"><span class="patient-avatar peach">JM</span><div><strong>Patient JM</strong><small>Demo ID · 10022</small></div></div></td><td>12 May 2026</td><td>Today, 10:30</td><td>Acne</td><td><span class="status waiting">Waiting</span></td><td>•••</td></tr>
+          <tr><td><div class="person"><span class="patient-avatar lilac">SK</span><div><strong>Patient SK</strong><small>Demo ID · 10023</small></div></div></td><td>04 Jul 2026</td><td>Today, 11:30</td><td>Follow-up</td><td><span class="status booked">Booked</span></td><td>•••</td></tr>
+          <tr><td><div class="person"><span class="patient-avatar blue">LT</span><div><strong>Patient LT</strong><small>Demo ID · 10024</small></div></div></td><td>—</td><td>Today, 13:30</td><td>General dermatology</td><td><span class="status new">New</span></td><td>•••</td></tr>
+        </tbody></table>
+      </div>
+    </section>
+
+    <section class="workspace-view" id="scribe" data-title="AI Scribe">
+      <div class="page-heading"><div><span class="overline">Ambient documentation</span><h1>AI Scribe</h1><p>A consent-first interface designed to launch an approved Heidi workflow.</p></div></div>
+      <div class="scribe-grid">
+        <section class="panel scribe-console">
+          <div class="scribe-state"><div class="mic-orbit"><div class="mic-button">●</div></div><span>Ready to begin</span><h2>Start a consultation</h2><p>Select the patient in Semble, confirm consent, then begin secure real-time transcription.</p></div>
+          <label class="consent-card"><input type="checkbox" id="scribe-consent"><span class="custom-check">✓</span><div><strong>Patient consent confirmed</strong><small>I have explained the AI scribe and the patient has agreed to its use for this consultation.</small></div></label>
+          <button class="record-button" id="record-button" type="button" disabled><span>●</span> Start secure scribe</button>
+          <p class="scribe-warning">Prototype only. This page does not access the microphone, record audio or generate clinical notes.</p>
+        </section>
+        <aside class="panel scribe-side">
+          <h2>Before you begin</h2>
+          <ol><li><span>1</span><p><strong>Open the patient record</strong>Use the verified patient identity from Semble.</p></li><li><span>2</span><p><strong>Explain and record consent</strong>The patient can decline without affecting their care.</p></li><li><span>3</span><p><strong>Review every draft</strong>The clinician remains responsible for checking and approving the final note.</p></li><li><span>4</span><p><strong>Save to the clinical record</strong>Only finalised notes belong in the official EHR.</p></li></ol>
+          <div class="provider-tile"><span class="heidi-logo">h</span><div><strong>Powered through Heidi</strong><small>Production integration required</small></div><i>↗</i></div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="workspace-view" id="documents" data-title="Team files">
+      <div class="page-heading"><div><span class="overline">Secure collaboration</span><h1>Team files</h1><p>A SharePoint-style workspace for policies, templates and operations—not a substitute for the patient record.</p></div><button class="primary-button" id="upload-demo">↑ Upload file</button></div>
+      <div class="file-layout">
+        <aside class="panel folder-tree"><h2>Libraries</h2><button class="active">▱ Clinic operations <b>24</b></button><button>▱ Clinical policies <b>18</b></button><button>▱ Patient resources <b>12</b></button><button>▱ Letter templates <b>9</b></button><button>▱ Finance &amp; insurers <b>15</b></button><hr><button>☆ Shared with me</button><button>♲ Recently deleted</button><div class="storage"><span><i style="width:34%"></i></span><small>3.4 GB of 10 GB used</small></div></aside>
+        <section class="panel file-panel">
+          <div class="breadcrumb"><span>Clinic operations</span><i>›</i><strong>General</strong></div>
+          <div class="file-toolbar"><button>+ New folder</button><button>↕ Sort</button><button>☷ View</button></div>
+          <div class="file-table">
+            <div class="file-row header"><span>Name</span><span>Owner</span><span>Modified</span><span></span></div>
+            <div class="file-row"><span><i class="folder-icon">▱</i><strong>Meeting notes</strong></span><span>Admin team</span><span>Today, 09:12</span><button>•••</button></div>
+            <div class="file-row"><span><i class="folder-icon">▱</i><strong>Staff training</strong></span><span>Dr Elangasinghe</span><span>18 Jul 2026</span><button>•••</button></div>
+            <div class="file-row"><span><i class="doc-icon pdf">PDF</i><strong>Clinic opening checklist.pdf</strong></span><span>Admin team</span><span>17 Jul 2026</span><button>•••</button></div>
+            <div class="file-row"><span><i class="doc-icon word">W</i><strong>Referral letter template.docx</strong></span><span>Dr Elangasinghe</span><span>15 Jul 2026</span><button>•••</button></div>
+            <div class="file-row"><span><i class="doc-icon sheet">X</i><strong>Weekly stock review.xlsx</strong></span><span>Nurse team</span><span>14 Jul 2026</span><button>•••</button></div>
+          </div>
+          <div class="file-security"><span>◈</span><p><strong>Role-based access required</strong>Production files need encryption, version history, audit logs, retention rules and tested backups.</p></div>
+        </section>
+      </div>
+    </section>
+
+    <section class="workspace-view simple-view" id="messages" data-title="Messages"><div class="page-heading"><div><span class="overline">Team communication</span><h1>Messages</h1><p>Secure internal conversations and patient communication should remain separated.</p></div><button class="primary-button">+ New message</button></div><div class="empty-module panel"><span>◇</span><h2>Secure messaging workspace</h2><p>This module is ready to connect to an approved communication provider. It deliberately sends no messages in the prototype.</p><button class="secondary-button">View integration plan</button></div></section>
+    <section class="workspace-view simple-view" id="tasks" data-title="Tasks"><div class="page-heading"><div><span class="overline">Team workflow</span><h1>Tasks</h1><p>Assign, track and audit follow-up actions across the clinic.</p></div><button class="primary-button">+ New task</button></div><div class="empty-module panel"><span>✓</span><h2>Shared clinical and operational tasks</h2><p>Production tasks should connect to the correct patient record where relevant and maintain a complete audit trail.</p><button class="secondary-button">Open workflow design</button></div></section>
+    <section class="workspace-view simple-view" id="billing" data-title="Billing"><div class="page-heading"><div><span class="overline">Practice finance</span><h1>Billing</h1><p>Payments, insurers and invoices should remain reconciled through the approved practice system.</p></div></div><div class="empty-module panel"><span>£</span><h2>Semble billing integration</h2><p>Use Semble Pay, insurer workflows and accounting integrations rather than storing card data in this website.</p><button class="secondary-button">View connection options</button></div></section>
+    <section class="workspace-view simple-view" id="reports" data-title="Reports"><div class="page-heading"><div><span class="overline">Clinic intelligence</span><h1>Reports</h1><p>Operational reporting without exposing unnecessary patient-level information.</p></div></div><div class="empty-module panel"><span>⌁</span><h2>Practice performance dashboard</h2><p>Connect de-identified operational metrics from approved sources after governance review.</p><button class="secondary-button">Define report access</button></div></section>
+    <section class="workspace-view simple-view" id="settings" data-title="Settings"><div class="page-heading"><div><span class="overline">Administration</span><h1>Settings</h1><p>Manage roles, integrations and clinic configuration.</p></div></div><div class="settings-grid"><div class="panel setting-card"><span>♙</span><h2>Users &amp; roles</h2><p>Least-privilege access and regular account reviews.</p></div><div class="panel setting-card"><span>⌘</span><h2>Integrations</h2><p>Semble, Heidi, secure files and notifications.</p></div><div class="panel setting-card"><span>◈</span><h2>Security &amp; audit</h2><p>MFA, session controls, device policy and audit logs.</p></div></div></section>
+  </main>
+
+  <div class="toast" id="portal-toast" role="status"></div>
+  <script src="portal.js"></script>
+</body>
+</html>

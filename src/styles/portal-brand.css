@@ -1,0 +1,170 @@
+.portal-brand {
+  display: flex;
+  align-items: center;
+  padding: 9px 10px 22px;
+  background: transparent;
+  border-radius: 4px 4px 0 0;
+}
+
+.portal-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+:root {
+  --ink: #20245f;
+  --forest: #20245f;
+  --paper: #fff;
+  --bg: #f2f6fa;
+  --line: #dce4ef;
+  --sage: #50bce8;
+  --mint: #dff3fb;
+  --coral: #eb8fa8;
+  --text: #626b88;
+}
+
+::selection {
+  color: #fff;
+  background: #2eace0;
+}
+
+.portal-notice {
+  background: #fbe5ec;
+  color: #843f5b;
+}
+
+.sidebar {
+  background: linear-gradient(180deg, #eefaff, #d9f2fb);
+  color: #20245f;
+  border-right: 1px solid #bfe5f4;
+}
+
+.portal-brand {
+  border-bottom-color: rgba(32, 36, 95, .14);
+}
+
+.nav-label {
+  color: #6876a0;
+}
+
+.nav-item {
+  color: #3f4a7d;
+}
+
+.nav-item:hover,
+.nav-item.active {
+  color: #20245f;
+  background: rgba(80, 188, 232, .2);
+}
+
+.nav-item.active {
+  box-shadow: inset 3px 0 #2dace0;
+}
+
+.nav-item b {
+  color: #20245f;
+  background: rgba(80, 188, 232, .28);
+}
+
+.nav-item em {
+  color: #a64768;
+  border-color: rgba(235, 143, 168, .75);
+  background: rgba(255, 255, 255, .45);
+}
+
+.sidebar-footer {
+  border-top-color: rgba(32, 36, 95, .14);
+}
+
+.sidebar-footer strong {
+  color: #20245f;
+}
+
+.sidebar-footer small,
+.sidebar-footer button {
+  color: #6876a0;
+}
+
+.user-avatar {
+  color: #fff;
+  background: linear-gradient(135deg, #50bce8, #303986);
+}
+
+.system-status i {
+  background: #3ab7e7;
+}
+
+.new-button,
+.primary-button,
+.record-button,
+.mic-button,
+.integration-card {
+  background: linear-gradient(135deg, #20245f, #303986);
+}
+
+.metric-icon.teal {
+  background: #dff3fb;
+  color: #287fa6;
+}
+
+.metric-icon.coral {
+  background: #fbe5ec;
+  color: #b55777;
+}
+
+.metric-icon.blue {
+  background: #e5e8f7;
+  color: #4e5ba4;
+}
+
+.appointment.active {
+  background: #eef8fc;
+  border-left-color: #50bce8;
+}
+
+.appointment.active .appointment-dot {
+  background: #3ab7e7;
+}
+
+.quick-grid i,
+.panel-heading button,
+.panel-footer-button {
+  color: #2a7fa7;
+}
+
+.calendar-toolbar button.selected,
+.consent-card:has(input:checked) .custom-check {
+  background: #20245f;
+}
+
+.cal-event.green {
+  background: #e1f4fb;
+  border-color: #50bce8;
+}
+
+.cal-event.coral {
+  background: #fbe7ed;
+  border-color: #eb8fa8;
+}
+
+.cal-event.blue {
+  background: #e8eafb;
+  border-color: #5d68b0;
+}
+
+.scribe-state > span,
+.overline {
+  color: #d96f92;
+}
+
+.folder-tree button.active,
+.file-security,
+.success-note {
+  background: #edf8fc;
+}
+
+.toast {
+  background: #20245f;
+  box-shadow: 0 12px 35px rgba(32, 36, 95, .25);
+}

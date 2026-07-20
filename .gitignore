@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+next-env.d.ts
+
+# Local data — never commit databases or uploaded files
+var/
+
+# Environment — never commit secrets
+.env
+.env.*
+!.env.example
+
+# Test artefacts
+coverage/
+playwright-report/
+test-results/
+
+# OS / editor
+.DS_Store
+*.pem
+.vscode/
+.idea/
