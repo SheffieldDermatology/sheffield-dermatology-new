@@ -29,7 +29,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-GB" className={`${dmSans.variable} ${newsreader.variable}`}>
+    <html
+      lang="en-GB"
+      data-scroll-behavior="smooth"
+      className={`${dmSans.variable} ${newsreader.variable}`}
+    >
       <body>{children}</body>
     </html>
   );

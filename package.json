@@ -16,6 +16,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
+    "test:e2e:server": "rm -rf var/dev-db && mkdir -p var/dev-db var/storage && npm run db:migrate && npm run db:seed && next dev -p 3100",
     "audit:deps": "npm audit --omit=dev"
   },
   "dependencies": {

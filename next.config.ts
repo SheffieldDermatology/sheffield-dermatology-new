@@ -2,10 +2,14 @@ import type { NextConfig } from "next";
 
 // Content Security Policy. No external hosts: fonts are self-hosted via
 // next/font and all assets are served from this origin. 'unsafe-inline' for
-// styles is required by Next's inlined critical CSS.
+// styles is required by Next's inlined critical CSS. 'unsafe-eval' is added
+// ONLY in development, where React's dev tooling uses eval(); production never
+// needs it and must not have it.
+const isDev = process.env.NODE_ENV !== "production";
+const scriptSrc = isDev ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'" : "script-src 'self' 'unsafe-inline'";
 const csp = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'",
+  scriptSrc,
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob:",
   "font-src 'self'",
