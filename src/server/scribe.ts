@@ -15,6 +15,7 @@
  * Unreviewed AI output is never placed into the clinical record.
  */
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 import { and, eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
@@ -55,7 +56,7 @@ export async function startScribeSession(
     .returning({ id: scribeSessions.id });
 
   await auditAction(user, "scribe.session_started", "scribe_session", session!.id);
-  return { ok: true, sessionId: session!.id };
+  redirect(`/staff/scribe/${session!.id}`);
 }
 
 const consentSchema = z.object({
