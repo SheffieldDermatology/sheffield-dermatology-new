@@ -69,10 +69,10 @@ export default function InsurancePage() {
               we will always be clear about this.
             </p>
             <div className="tbc-panel">
-              <strong>Recognised insurers are being confirmed.</strong> The list of insurers Dr
-              Vinod Elangasinghe is recognised by, and the details of insurer billing, will be
-              published here once confirmed. In the meantime, please check your cover with your
-              insurer and <Link href="/contact">contact us</Link> if you have any questions.
+              <strong>Dr Elangasinghe is recognised by Bupa.</strong> The full list of insurers he
+              is recognised by, and the details of insurer billing, is being confirmed and will be
+              published here. Please check your cover and any pre-authorisation requirements with
+              your insurer, and <Link href="/contact">contact us</Link> if you have any questions.
             </div>
             <p>
               If you are paying for yourself instead, see our <Link href="/fees">fees page</Link>.

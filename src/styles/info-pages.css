@@ -106,3 +106,15 @@
   .faq-list summary { font-size: 18px; }
   .contact-form-panel { padding: 28px 22px; }
 }
+
+/* ── Consultant portrait photo (About page) ─────────────────────────── */
+.portrait-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 560px;
+  object-fit: cover;
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  background: var(--mist);
+}

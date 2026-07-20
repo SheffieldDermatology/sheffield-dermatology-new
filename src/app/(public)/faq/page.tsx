@@ -113,11 +113,12 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
     ),
   },
   {
-    q: "Do you treat children?",
+    q: "Do you see children?",
     a: (
       <p>
-        Consultations are provided for adults. If you are booking on behalf of someone else, please{" "}
-        <Link href="/contact">contact the clinic</Link> to check suitability first.
+        Yes — Dr Elangasinghe provides dermatology consultations for both adults and children. If
+        you are booking for a child, please <Link href="/contact">contact the clinic</Link> if you
+        have any questions about the appointment.
       </p>
     ),
   },

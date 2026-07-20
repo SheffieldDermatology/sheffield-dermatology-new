@@ -234,8 +234,8 @@ export default async function HomePage() {
             </p>
             <p>
               Dr Vinod Elangasinghe provides thoughtful, evidence-informed dermatology
-              consultations for adults. Your appointment is unhurried, your concerns are taken
-              seriously, and your options are explained clearly.
+              consultations for adults and children. Your appointment is unhurried, your concerns
+              are taken seriously, and your options are explained clearly.
             </p>
             <Link className="button button-light" href="/about">
               About Dr Elangasinghe <span>→</span>

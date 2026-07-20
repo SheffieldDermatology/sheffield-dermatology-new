@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import "@/styles/info-pages.css";
+import portrait from "../../../../public/assets/dr-vinod-elangasinghe.jpg";
 
 export const metadata: Metadata = {
   title: "About Dr Vinod Elangasinghe | Sheffield Dermatology",
@@ -29,9 +31,9 @@ export default function AboutPage() {
             <em>Elangasinghe.</em>
           </h1>
           <p className="page-lead">
-            Consultant Dermatologist, Sheffield Dermatology. Every consultation is led personally
-            by Dr Elangasinghe — with time to listen, examine carefully and explain your options in
-            plain language.
+            Consultant Dermatologist. Dr Elangasinghe provides consultant-led care for adults and
+            children — with time to listen, examine carefully and explain your options in plain
+            language.
           </p>
         </div>
       </section>
@@ -39,14 +41,14 @@ export default function AboutPage() {
       <section className="doctor section">
         <div className="container doctor-grid">
           <div className="doctor-portrait">
-            <div className="portrait-placeholder">
-              <span>Dr VE</span>
-              <small>
-                Professional portrait
-                <br />
-                to be added
-              </small>
-            </div>
+            <Image
+              src={portrait}
+              alt="Dr Vinod Elangasinghe, Consultant Dermatologist"
+              className="portrait-photo"
+              width={455}
+              height={280}
+              priority
+            />
             <div className="portrait-caption">
               <span>Consultant Dermatologist</span>
               <i></i>
@@ -56,36 +58,45 @@ export default function AboutPage() {
           <div className="doctor-copy">
             <span className="eyebrow light">Professional details</span>
             <h2>
-              Credentials,
+              Consultant-led
               <br />
-              <em>published carefully.</em>
+              <em>dermatology.</em>
             </h2>
             <p>
-              We only publish professional details once they have been supplied by Dr Elangasinghe
-              and checked against authoritative sources, such as the General Medical Council
-              register. The entries below will be completed before the clinic opens for bookings.
+              Dr Vinod Elangasinghe is a Consultant Dermatologist providing private dermatology
+              consultations for adults and children. He qualified in 2001 and trained across the UK,
+              becoming a member and then a fellow of the Royal College of Physicians, with
+              accreditation in dermatology.
             </p>
             <div className="credentials">
               <div>
                 <span>Qualifications</span>
-                <strong>To be confirmed</strong>
+                <strong>MBBS, MRCP (UK), MRCP (Dermatology, UK), FRCP</strong>
               </div>
               <div>
                 <span>GMC registration</span>
-                <strong>To be confirmed — will be published once verified</strong>
+                <strong>6027383</strong>
               </div>
               <div>
-                <span>Memberships</span>
-                <strong>To be confirmed</strong>
+                <span>Specialty</span>
+                <strong>Consultant Dermatologist (adult &amp; paediatric)</strong>
               </div>
               <div>
-                <span>Experience</span>
-                <strong>To be confirmed</strong>
+                <span>Sheffield clinic</span>
+                <strong>Thornbury Hospital, 312 Fulwood Road, Sheffield S10 3BR</strong>
               </div>
             </div>
+            <p className="tbc-badge" style={{ marginTop: 4 }}>
+              Details to confirm before launch
+            </p>
             <p>
-              You can check any doctor&rsquo;s registration yourself on the General Medical
-              Council&rsquo;s public register.
+              These professional details were compiled from Dr Elangasinghe&rsquo;s existing public
+              profiles and should be confirmed by him, and checked against the{" "}
+              <a href="https://www.gmc-uk.org/registration-and-licensing/the-medical-register" rel="noopener noreferrer" target="_blank">
+                GMC public register
+              </a>
+              , before the site goes live. You can check any doctor&rsquo;s registration there
+              yourself.
             </p>
           </div>
         </div>
