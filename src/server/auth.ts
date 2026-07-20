@@ -75,10 +75,10 @@ export async function patientSignIn(
 
   const result = await verifyCredentials(parsed.data.email, parsed.data.password);
   if (!result.ok) {
-    if (result.reason === "locked") {
-      return { error: "This account is temporarily locked after repeated attempts. Try again later or reset your password." };
-    }
-    return { error: "That email address and password combination was not recognised." };
+    // Deliberately identical for "invalid" and "locked" so the response never
+    // reveals whether an account exists. A locked-out user recovers via reset,
+    // which clears the lockout.
+    return { error: "That email address and password combination was not recognised, or the account is temporarily locked after repeated attempts. If needed, reset your password." };
   }
   if (result.kind !== "patient") {
     return { error: "That email address and password combination was not recognised." };
@@ -106,13 +106,12 @@ export async function staffSignIn(_prev: ActionState, formData: FormData): Promi
 
   const result = await verifyCredentials(parsed.data.email, parsed.data.password);
   if (!result.ok) {
-    if (result.reason === "locked") {
-      return { error: "This account is temporarily locked after repeated attempts. Try again later." };
-    }
-    return { error: "That email address and password combination was not recognised." };
+    // Identical for "invalid" and "locked" so the response never reveals
+    // whether an account exists.
+    return { error: "That email address and password combination was not recognised, or the account is temporarily locked after repeated attempts." };
   }
   if (result.kind !== "staff") {
-    return { error: "That email address and password combination was not recognised." };
+    return { error: "That email address and password combination was not recognised, or the account is temporarily locked after repeated attempts." };
   }
 
   // Session starts unverified; MFA challenge or enrolment upgrades it.

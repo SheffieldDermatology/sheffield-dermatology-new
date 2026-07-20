@@ -31,6 +31,8 @@ import { generateToken } from "@/lib/auth/tokens";
 
 const HOLDER_COOKIE = "sd_booking_holder";
 
+class SlotTakenError extends Error {}
+
 async function holderKey(): Promise<string> {
   const store = await cookies();
   let key = store.get(HOLDER_COOKIE)?.value;
@@ -104,7 +106,9 @@ const bookingSchema = z.object({
   notes: z.string().trim().max(1000).optional().or(z.literal("")),
   privacyConsent: z.literal("on"),
   cancellationConsent: z.literal("on"),
-  idempotencyKey: z.string().min(8).max(64),
+  // Restricted to a safe character set: prevents LIKE wildcards (% / _) in the
+  // idempotency lookup from matching another patient's booking.
+  idempotencyKey: z.string().min(8).max(64).regex(/^[A-Za-z0-9-]+$/),
 });
 
 export type BookingState =
@@ -170,6 +174,28 @@ export async function createBooking(
     return { status: "error", error: "That clinician is not available. Please choose another time." };
   }
 
+  // Re-validate against the availability engine: the client must not be able to
+  // book a slot that was never genuinely offered (past, out of hours, on a
+  // clinician's day off, inside the 24h lead time, or beyond the horizon).
+  // isSlotFree only checks conflicts, so this is a separate, necessary gate.
+  const { clinicDateString } = await import("@/lib/booking/time");
+  const dayISO = clinicDateString(startsAt);
+  const offered = await getAvailabilityForDay({
+    serviceId: data.serviceId,
+    clinicianId: data.clinicianId,
+    dateISO: dayISO,
+    visitType: data.visitType,
+  });
+  const isOffered = offered.slots.some(
+    (s) => new Date(s.startsAt).getTime() === startsAt.getTime() && s.clinicianId === data.clinicianId,
+  );
+  if (!isOffered) {
+    return {
+      status: "error",
+      error: "That time is no longer available to book. Please choose an available slot.",
+    };
+  }
+
   const key = await holderKey();
   const free = await isSlotFree({
     serviceId: data.serviceId,
@@ -214,27 +240,50 @@ export async function createBooking(
     }
   }
 
-  // Create the appointment. The DB unique index enforces no double-booking; a
-  // race that slips past isSlotFree fails the insert, which we handle.
+  // Create the appointment atomically. A per-clinician advisory lock inside a
+  // transaction serialises concurrent bookings for the same clinician, so the
+  // overlap check and insert cannot race (the DB unique index only catches
+  // identical start instants, not overlapping intervals). Advisory locks are a
+  // no-op cost on the single-connection dev database and correct on production
+  // PostgreSQL.
   let appointmentId: string;
   try {
-    const [created] = await db
-      .insert(appointments)
-      .values({
-        patientId: patientId!,
-        clinicianId: data.clinicianId,
-        serviceId: data.serviceId,
-        startsAt,
-        endsAt,
-        visitType: data.visitType,
-        status: outcome === "confirmed" ? "confirmed" : "requested",
-        source: "online",
-        staffNotes: [data.notes ? `Patient note: ${data.notes}` : "", `idem:${data.idempotencyKey}`]
-          .filter(Boolean)
-          .join("\n"),
-      })
-      .returning({ id: appointments.id });
-    appointmentId = created!.id;
+    appointmentId = await db.transaction(async (tx) => {
+      await tx.execute(sql`select pg_advisory_xact_lock(hashtext(${data.clinicianId}))`);
+
+      // Overlap check within the locked transaction, against committed rows.
+      const conflicts = await tx
+        .select({ id: appointments.id })
+        .from(appointments)
+        .where(
+          sql`${appointments.clinicianId} = ${data.clinicianId}
+            and ${appointments.status} in ('requested','confirmed')
+            and ${appointments.startsAt} < ${endsAt}
+            and ${appointments.endsAt} > ${startsAt}`,
+        )
+        .limit(1);
+      if (conflicts.length > 0) {
+        throw new SlotTakenError();
+      }
+
+      const [created] = await tx
+        .insert(appointments)
+        .values({
+          patientId: patientId!,
+          clinicianId: data.clinicianId,
+          serviceId: data.serviceId,
+          startsAt,
+          endsAt,
+          visitType: data.visitType,
+          status: outcome === "confirmed" ? "confirmed" : "requested",
+          source: "online",
+          staffNotes: [data.notes ? `Patient note: ${data.notes}` : "", `idem:${data.idempotencyKey}`]
+            .filter(Boolean)
+            .join("\n"),
+        })
+        .returning({ id: appointments.id });
+      return created!.id;
+    });
   } catch {
     return {
       status: "error",

@@ -57,9 +57,11 @@ export async function POST(request: Request) {
       .limit(1);
     const payment = paymentRows[0];
     if (payment) {
-      // Cross-check the amount; flag a mismatch rather than trusting the event.
+      // Cross-check the amount. A missing/non-numeric amount is treated as a
+      // mismatch: we never mark a payment succeeded without a verified amount
+      // that matches the stored value.
       const mismatch =
-        typeof result.amountPence === "number" && result.amountPence !== payment.amountPence;
+        typeof result.amountPence !== "number" || result.amountPence !== payment.amountPence;
       await db
         .update(payments)
         .set({

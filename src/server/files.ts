@@ -14,7 +14,6 @@ import { and, eq, isNull } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { fileLibraries, fileEntries, fileVersions } from "@/lib/db/schema";
 import { requirePermission, auditAction } from "@/lib/auth/guards";
-import { rolesHavePermission } from "@/lib/rbac/permissions";
 import { createStorageProvider, newStorageKey } from "@/adapters/storage";
 
 export type FileActionState = { ok?: boolean; error?: string };
@@ -147,10 +146,15 @@ export async function restoreFile(_prev: FileActionState, formData: FormData): P
   return { ok: true };
 }
 
-/** Reads a library's live (non-deleted) entries; caller must hold files.read. */
-export async function listLibraryEntries(libraryId: string, roles: string[]) {
-  if (!rolesHavePermission(roles as never, "files.read")) return [];
-  if (!(await assertLibraryReadable(libraryId, roles))) return [];
+/**
+ * Reads a library's live (non-deleted) entries. This is a Server Action, so it
+ * derives the caller from the session and enforces files.read server-side — it
+ * MUST NOT accept a roles argument from the client (that would be trivially
+ * spoofable and bypass both the permission gate and per-library restrictions).
+ */
+export async function listLibraryEntries(libraryId: string) {
+  const user = await requirePermission("files.read");
+  if (!(await assertLibraryReadable(libraryId, user.roles))) return [];
   const db = getDb();
   return db
     .select()

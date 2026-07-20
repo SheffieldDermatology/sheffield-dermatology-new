@@ -160,8 +160,11 @@ export async function saveScribeDraft(
     .limit(1);
   const session = rows[0];
   if (!session) return { error: "Scribe session not found." };
-  if (session.status === "awaiting_consent" || session.status === "consent_declined") {
-    return { error: "A draft can only be created after consent has been given." };
+  // Allowlist: a draft may only be created while consent is granted and the
+  // session is active — never before consent, after a decline, or once stopped.
+  const CONSENTED_ACTIVE = ["ready", "recording", "processing", "draft_ready"];
+  if (!session.consentId || !CONSENTED_ACTIVE.includes(session.status)) {
+    return { error: "A draft can only be created after consent has been given and while the session is active." };
   }
 
   const existing = await db
@@ -216,6 +219,16 @@ export async function approveScribeNote(
     .limit(1);
   const session = rows[0];
   if (!session) return { error: "Scribe session not found." };
+  // A note may only be approved when consent was granted and a draft is ready —
+  // never for a session that was declined, never consented, or abandoned.
+  if (!session.consentId || session.status !== "draft_ready") {
+    return { error: "This session has no consented draft ready for approval." };
+  }
+  // Confirm the linked consent was actually granted (defence in depth).
+  const consentRows = await db.select().from(consents).where(eq(consents.id, session.consentId)).limit(1);
+  if (!consentRows[0]?.granted) {
+    return { error: "Consent for AI-assisted documentation was not granted for this session." };
+  }
   const noteRows = await db
     .select()
     .from(scribeNotes)

@@ -23,7 +23,7 @@ export default async function FilesPage({ searchParams }: { searchParams: Promis
   );
   const { lib } = await searchParams;
   const selected = libraries.find((l) => l.id === lib) ?? libraries[0];
-  const entries = selected ? await listLibraryEntries(selected.id, user.roles) : [];
+  const entries = selected ? await listLibraryEntries(selected.id) : [];
 
   const canWrite = rolesHavePermission(user.roles, "files.write");
   const canDelete = rolesHavePermission(user.roles, "files.delete");
