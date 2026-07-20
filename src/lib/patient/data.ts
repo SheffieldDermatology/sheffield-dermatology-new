@@ -3,7 +3,7 @@
  * filters by it — a patient can only ever read rows keyed to their own record.
  * Enforcement lives here in the data layer, not in the UI.
  */
-import { and, desc, eq, gte, lt, or, inArray } from "drizzle-orm";
+import { and, desc, eq, gte, lt, inArray } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import {
   appointments,

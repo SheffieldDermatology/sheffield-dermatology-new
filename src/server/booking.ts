@@ -30,7 +30,6 @@ import { queueEmail } from "@/lib/notify";
 import { generateToken } from "@/lib/auth/tokens";
 
 const HOLDER_COOKIE = "sd_booking_holder";
-const HOLD_MINUTES = 10;
 
 async function holderKey(): Promise<string> {
   const store = await cookies();

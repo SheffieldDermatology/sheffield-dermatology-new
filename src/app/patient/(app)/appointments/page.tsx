@@ -56,7 +56,10 @@ export default async function AppointmentsPage() {
                       <span className={`pill pill-${a.status}`}>{statusLabel(a.status)}</span>
                     </td>
                     <td>
-                      <CancelAppointmentButton appointmentId={a.id} startsAt={a.startsAt.toISOString()} />
+                      <CancelAppointmentButton
+                        appointmentId={a.id}
+                        withinDay={a.startsAt.getTime() - Date.now() < 24 * 60 * 60 * 1000}
+                      />
                     </td>
                   </tr>
                 ))}

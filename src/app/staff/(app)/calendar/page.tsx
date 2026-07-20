@@ -3,7 +3,7 @@ import Link from "next/link";
 import { requireStaff } from "@/lib/auth/guards";
 import { rolesHavePermission } from "@/lib/rbac/permissions";
 import { getWeekSchedule } from "@/lib/staff/data";
-import { formatTime, statusLabel } from "@/lib/format";
+import { formatTime } from "@/lib/format";
 import PermissionDenied from "@/components/app/PermissionDenied";
 
 export const metadata: Metadata = { title: "Calendar" };

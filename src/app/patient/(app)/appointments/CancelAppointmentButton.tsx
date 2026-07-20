@@ -5,17 +5,15 @@ import { cancelAppointment, type PatientActionState } from "@/server/patient";
 
 export default function CancelAppointmentButton({
   appointmentId,
-  startsAt,
+  withinDay,
 }: {
   appointmentId: string;
-  startsAt: string;
+  withinDay: boolean;
 }) {
   const [state, action, pending] = useActionState<PatientActionState, FormData>(
     cancelAppointment,
     {},
   );
-
-  const withinDay = new Date(startsAt).getTime() - Date.now() < 24 * 60 * 60 * 1000;
 
   if (state.ok) {
     return <span style={{ fontSize: 12, color: "var(--app-muted)" }}>{state.message}</span>;
