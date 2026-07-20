@@ -22,11 +22,10 @@ test.describe("critical journeys", () => {
     // Step 1: choose the first service and continue.
     await page.locator('input[name="service"]').first().check();
     await page.getByRole("button", { name: /choose date & time/i }).click();
-    // Step 2: pick a date ~10 days out on a weekday.
-    const d = new Date(Date.now() + 10 * 86400_000);
-    while (d.getUTCDay() === 0 || d.getUTCDay() === 6) d.setUTCDate(d.getUTCDate() + 1);
-    const iso = d.toISOString().slice(0, 10);
-    await page.locator("#book-date").fill(iso);
+    // Step 2: pick the first available day in the month calendar.
+    const firstAvailableDay = page.locator(".cal-cell.available").first();
+    await firstAvailableDay.waitFor({ state: "visible", timeout: 15000 });
+    await firstAvailableDay.click();
     // Wait for slots to load, choose the first.
     const firstSlot = page.locator('input[name="slot"]').first();
     await firstSlot.waitFor({ state: "attached", timeout: 15000 });

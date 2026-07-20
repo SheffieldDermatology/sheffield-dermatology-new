@@ -92,6 +92,40 @@ export async function getAvailabilityForDay(input: {
   };
 }
 
+/** Distinct clinic-local dates in a month that have at least one free slot. */
+export async function getAvailableDaysForMonth(input: {
+  serviceId: string;
+  clinicianId?: string;
+  year: number;
+  month: number; // 1–12
+  visitType?: "in_person" | "video";
+}): Promise<{ days: string[] }> {
+  const parsed = z
+    .object({
+      serviceId: z.string().uuid(),
+      clinicianId: z.string().uuid().optional(),
+      year: z.number().int().min(2024).max(2100),
+      month: z.number().int().min(1).max(12),
+      visitType: z.enum(["in_person", "video"]).optional(),
+    })
+    .safeParse(input);
+  if (!parsed.success) return { days: [] };
+
+  const from = new Date(Date.UTC(parsed.data.year, parsed.data.month - 1, 1));
+  const to = new Date(Date.UTC(parsed.data.year, parsed.data.month, 0, 23, 59, 59));
+  const provider = await getBookingProvider();
+  const { clinicDateString } = await import("@/lib/booking/time");
+  const slots = await provider.getAvailability({
+    serviceId: parsed.data.serviceId,
+    clinicianId: parsed.data.clinicianId,
+    from,
+    to,
+    visitType: parsed.data.visitType,
+  });
+  const days = Array.from(new Set(slots.map((s) => clinicDateString(s.startsAt)))).sort();
+  return { days };
+}
+
 // ── Create booking (request-first) ──────────────────────────────────────
 
 const bookingSchema = z.object({

@@ -5,6 +5,7 @@ import Link from "next/link";
 import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { createBooking, getAvailabilityForDay, type BookingState } from "@/server/booking";
+import BookingCalendar from "./BookingCalendar";
 
 interface ServiceOption {
   id: string;
@@ -23,12 +24,6 @@ interface DaySlot {
   clinicianId: string;
   clinicianName: string;
   label: string;
-}
-
-function minBookableDate(): string {
-  const d = new Date();
-  d.setDate(d.getDate() + 2); // 24h+ lead, rounded up to next clear day
-  return d.toISOString().slice(0, 10);
 }
 
 function makeIdempotencyKey(): string {
@@ -201,49 +196,60 @@ export default function BookingWizard({
             Times shown are genuine availability
             {bookingLive ? "" : ". Your booking is a request the clinic will confirm"}.
           </p>
-          <div className="field-block">
-            <label htmlFor="book-date">Preferred date</label>
-            <input
-              id="book-date"
-              type="date"
-              min={minBookableDate()}
-              value={date}
-              onChange={(e) => {
-                setDate(e.target.value);
-                loadSlots(e.target.value);
-              }}
-            />
+          <div className="cal-layout">
+            <div className="cal-panel">
+              <span className="cal-panel-label">Choose a date</span>
+              <BookingCalendar
+                serviceId={serviceId}
+                clinicianId={clinicianId || undefined}
+                visitType={visitType}
+                selected={date || null}
+                onSelect={(iso) => {
+                  setDate(iso);
+                  loadSlots(iso);
+                }}
+              />
+            </div>
+
+            <div className="times-panel">
+              <span className="cal-panel-label">
+                {date
+                  ? `Times on ${new Date(`${date}T12:00:00`).toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long" })}`
+                  : "Available times"}
+              </span>
+
+              {!date && <p className="times-hint">Pick an available date to see times.</p>}
+
+              {date && loadingSlots && (
+                <p className="time-empty">
+                  <span className="spinner" aria-hidden="true" /> Checking availability…
+                </p>
+              )}
+
+              {date && !loadingSlots && slots.length === 0 && (
+                <div className="time-empty">
+                  No appointments are available on that date. Try another day, or{" "}
+                  <Link href="/book/waiting-list">join the waiting list</Link>.
+                </div>
+              )}
+
+              {date && !loadingSlots && slots.length > 0 && (
+                <div className="time-grid" role="radiogroup" aria-label="Available times">
+                  {slots.map((slot) => (
+                    <label key={`${slot.startsAt}-${slot.clinicianId}`}>
+                      <input
+                        type="radio"
+                        name="slot"
+                        checked={selectedSlot?.startsAt === slot.startsAt && selectedSlot?.clinicianId === slot.clinicianId}
+                        onChange={() => setSelectedSlot(slot)}
+                      />
+                      {slot.label}
+                    </label>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
-
-          {loadingSlots && (
-            <p className="time-empty">
-              <span className="spinner" aria-hidden="true" /> Checking availability…
-            </p>
-          )}
-
-          {!loadingSlots && date && slots.length === 0 && (
-            <div className="time-empty">
-              No appointments are available on that date. Try another day, or{" "}
-              <Link href="/book/waiting-list">join the waiting list</Link> and we&rsquo;ll be in
-              touch when something suitable opens up.
-            </div>
-          )}
-
-          {!loadingSlots && slots.length > 0 && (
-            <div className="time-grid" role="radiogroup" aria-label="Available times">
-              {slots.map((slot) => (
-                <label key={`${slot.startsAt}-${slot.clinicianId}`}>
-                  <input
-                    type="radio"
-                    name="slot"
-                    checked={selectedSlot?.startsAt === slot.startsAt && selectedSlot?.clinicianId === slot.clinicianId}
-                    onChange={() => setSelectedSlot(slot)}
-                  />
-                  {slot.label}
-                </label>
-              ))}
-            </div>
-          )}
 
           <div className="book-buttons">
             <button type="button" className="book-back" onClick={() => setStep(1)}>
