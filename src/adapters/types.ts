@@ -15,6 +15,7 @@ export type AdapterMode = "production" | "development" | "disabled";
 
 export interface AvailabilitySlot {
   clinicianId: string;
+  clinicianName: string;
   serviceId: string;
   startsAt: Date;
   endsAt: Date;

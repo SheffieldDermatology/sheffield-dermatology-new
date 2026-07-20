@@ -1,0 +1,256 @@
+/* Booking journey. Builds on public.css/brand.css tokens. */
+.book-hero {
+  background: var(--cream);
+  padding: 60px 0 40px;
+  border-bottom: 1px solid var(--line);
+}
+.book-hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(38px, 4.6vw, 58px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  margin: 16px 0 10px;
+}
+.book-hero .page-lead {
+  max-width: 620px;
+  color: #646b88;
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+.book-wrap {
+  padding: 46px 0 90px;
+}
+.book-shell {
+  max-width: 760px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 34px 38px 40px;
+}
+.book-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+.book-progress-step {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: #8a90ab;
+}
+.book-progress-step .num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 700;
+}
+.book-progress-step.active {
+  color: var(--ink);
+  font-weight: 700;
+}
+.book-progress-step.active .num {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+}
+.book-progress-step.done .num {
+  background: var(--sage);
+  color: #fff;
+  border-color: var(--sage);
+}
+.book-progress i {
+  flex: 1;
+  min-width: 12px;
+  height: 1px;
+  background: var(--line);
+}
+.book-step h2 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 500;
+  margin: 0 0 6px;
+}
+.book-step > p.step-help {
+  color: #646b88;
+  font-size: 14px;
+  margin: 0 0 22px;
+}
+.book-choice {
+  display: block;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.book-choice:hover {
+  border-color: var(--sage);
+  background: var(--mist);
+}
+.book-choice:has(input:checked) {
+  border-color: var(--sage);
+  background: var(--mist);
+  box-shadow: inset 0 0 0 1px var(--sage);
+}
+.book-choice input {
+  position: absolute;
+  opacity: 0;
+}
+.book-choice strong {
+  display: block;
+  font-size: 15px;
+  color: var(--ink);
+}
+.book-choice small {
+  display: block;
+  color: #646b88;
+  font-size: 13px;
+  margin-top: 3px;
+}
+.book-choice .fee {
+  float: right;
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--ink);
+}
+.visit-toggle {
+  display: flex;
+  gap: 10px;
+  margin: 8px 0 4px;
+}
+.visit-toggle label {
+  flex: 1;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.visit-toggle label:has(input:checked) {
+  border-color: var(--sage);
+  background: var(--mist);
+  box-shadow: inset 0 0 0 1px var(--sage);
+}
+.visit-toggle input {
+  position: absolute;
+  opacity: 0;
+}
+.time-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 10px;
+  margin: 16px 0;
+}
+.time-grid label {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px 6px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+}
+.time-grid label:has(input:checked) {
+  border-color: var(--sage);
+  background: var(--ink);
+  color: #fff;
+}
+.time-grid input {
+  position: absolute;
+  opacity: 0;
+}
+.time-empty {
+  background: var(--mist);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px;
+  font-size: 14px;
+  color: #4b5064;
+  margin: 14px 0;
+}
+.book-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 26px;
+}
+.book-back {
+  background: none;
+  border: 0;
+  color: #646b88;
+  font-size: 14px;
+  font-weight: 600;
+}
+.book-summary-box {
+  background: var(--mist);
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin: 4px 0 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #4b5064;
+}
+.book-summary-box strong {
+  color: var(--ink);
+}
+.book-success {
+  text-align: center;
+  padding: 10px 0;
+}
+.book-success .tick {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: #fff;
+  font-size: 30px;
+  display: grid;
+  place-items: center;
+  margin: 0 auto 16px;
+}
+.book-success h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+.book-note {
+  background: #fdf6e7;
+  border: 1px solid #f0dcae;
+  border-radius: 10px;
+  padding: 14px 18px;
+  margin: 18px 0;
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #7a5b16;
+  text-align: left;
+}
+.book-actions-row {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+@media (max-width: 620px) {
+  .book-shell {
+    padding: 24px 20px 30px;
+  }
+  .book-progress-step small {
+    display: none;
+  }
+}
