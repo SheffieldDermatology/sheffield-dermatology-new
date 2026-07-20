@@ -64,9 +64,11 @@ export default function AboutPage() {
             </h2>
             <p>
               Dr Vinod Elangasinghe is a Consultant Dermatologist providing private dermatology
-              consultations for adults and children. He qualified in 2001 and trained across the UK,
-              becoming a member and then a fellow of the Royal College of Physicians, with
-              accreditation in dermatology.
+              consultations for adults and children — the trusted destination for the diagnosis and
+              treatment of skin conditions and skin cancer across all age groups. He trained across
+              the UK, becoming a member and then a fellow of the Royal College of Physicians, with
+              accreditation in dermatology, and is a co-editor of the{" "}
+              <em>Clinical and Experimental Dermatology</em> journal.
             </p>
             <div className="credentials">
               <div>
@@ -82,10 +84,19 @@ export default function AboutPage() {
                 <strong>Consultant Dermatologist (adult &amp; paediatric)</strong>
               </div>
               <div>
-                <span>Sheffield clinic</span>
-                <strong>Thornbury Hospital, 312 Fulwood Road, Sheffield S10 3BR</strong>
+                <span>Memberships</span>
+                <strong>Co-editor, Clinical and Experimental Dermatology journal</strong>
               </div>
             </div>
+            <p style={{ marginTop: 4 }}>
+              <strong>Positions held</strong>
+            </p>
+            <ul className="info-list">
+              <li>Consultant Dermatologist, Chesterfield Royal Hospital NHS FT — 2011–2016</li>
+              <li>Skin Cancer MDT Head, North Derbyshire, Chesterfield — 2014–2016</li>
+              <li>Vice Chair, Skin Cancer NSSG, South Yorkshire and Humberside — 2014–2016</li>
+              <li>Honorary Senior Clinical Lecturer, University of Sheffield — 2012–2016</li>
+            </ul>
             <p className="tbc-badge" style={{ marginTop: 4 }}>
               Details to confirm before launch
             </p>

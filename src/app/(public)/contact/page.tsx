@@ -65,14 +65,27 @@ export default async function ContactPage() {
                   <p>To be confirmed — please use the contact form</p>
                 )}
               </div>
-              <div>
-                <small>Clinic address</small>
-                {clinic.addressLines ? (
-                  <p>{clinic.addressLines.join(", ")}</p>
-                ) : (
-                  <p>Sheffield — full address to be confirmed</p>
-                )}
-              </div>
+              {clinic.locations && clinic.locations.length > 0 ? (
+                <div>
+                  <small>Consultation offices</small>
+                  {clinic.locations.map((loc) => (
+                    <p key={loc.name} style={{ marginBottom: "10px" }}>
+                      <strong>{loc.name}</strong>
+                      <br />
+                      {loc.lines.join(", ")}
+                    </p>
+                  ))}
+                </div>
+              ) : (
+                <div>
+                  <small>Clinic address</small>
+                  {clinic.addressLines ? (
+                    <p>{clinic.addressLines.join(", ")}</p>
+                  ) : (
+                    <p>Sheffield — full address to be confirmed</p>
+                  )}
+                </div>
+              )}
               <div>
                 <small>Opening hours</small>
                 <p>{clinic.openingHours ?? "To be confirmed"}</p>

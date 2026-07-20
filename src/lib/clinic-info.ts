@@ -8,6 +8,11 @@ import { inArray } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { settings } from "@/lib/db/schema";
 
+export interface ClinicLocation {
+  name: string;
+  lines: string[];
+}
+
 export interface ClinicInfo {
   phone: string | null;
   email: string | null;
@@ -15,6 +20,8 @@ export interface ClinicInfo {
   openingHours: string | null;
   legalEntity: string | null;
   icoRegistration: string | null;
+  /** Consultation offices, when the clinic operates from more than one site. */
+  locations: ClinicLocation[] | null;
 }
 
 const KEYS = [
@@ -24,6 +31,7 @@ const KEYS = [
   "clinic.opening_hours",
   "clinic.legal_entity",
   "clinic.ico_registration",
+  "clinic.locations",
 ] as const;
 
 export const getClinicInfo = cache(async (): Promise<ClinicInfo> => {
@@ -38,6 +46,16 @@ export const getClinicInfo = cache(async (): Promise<ClinicInfo> => {
     return typeof v === "string" && v.trim() !== "" ? v : null;
   };
   const lines = map.get("clinic.address_lines");
+  const locations = map.get("clinic.locations");
+  const validLocations =
+    Array.isArray(locations) &&
+    locations.every(
+      (l): l is ClinicLocation =>
+        !!l && typeof (l as ClinicLocation).name === "string" && Array.isArray((l as ClinicLocation).lines),
+    ) &&
+    locations.length > 0
+      ? (locations as ClinicLocation[])
+      : null;
   return {
     phone: str("clinic.phone"),
     email: str("clinic.email"),
@@ -45,5 +63,6 @@ export const getClinicInfo = cache(async (): Promise<ClinicInfo> => {
     openingHours: str("clinic.opening_hours"),
     legalEntity: str("clinic.legal_entity"),
     icoRegistration: str("clinic.ico_registration"),
+    locations: validLocations,
   };
 });
