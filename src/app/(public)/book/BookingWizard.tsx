@@ -300,21 +300,25 @@ export default function BookingWizard({
           <input type="hidden" name="visitType" value={visitType} />
           <input type="hidden" name="idempotencyKey" value={idempotencyKey} />
 
-          <div className="field-block">
-            <label htmlFor="bf-first">First name *</label>
-            <input id="bf-first" name="firstName" autoComplete="given-name" required maxLength={80} />
+          <div className="field-row">
+            <div className="field-block">
+              <label htmlFor="bf-first">First name *</label>
+              <input id="bf-first" name="firstName" autoComplete="given-name" required maxLength={80} />
+            </div>
+            <div className="field-block">
+              <label htmlFor="bf-last">Last name *</label>
+              <input id="bf-last" name="lastName" autoComplete="family-name" required maxLength={80} />
+            </div>
           </div>
-          <div className="field-block">
-            <label htmlFor="bf-last">Last name *</label>
-            <input id="bf-last" name="lastName" autoComplete="family-name" required maxLength={80} />
-          </div>
-          <div className="field-block">
-            <label htmlFor="bf-email">Email address *</label>
-            <input id="bf-email" name="email" type="email" autoComplete="email" required maxLength={254} />
-          </div>
-          <div className="field-block">
-            <label htmlFor="bf-phone">Mobile number</label>
-            <input id="bf-phone" name="phone" type="tel" autoComplete="tel" maxLength={30} />
+          <div className="field-row">
+            <div className="field-block">
+              <label htmlFor="bf-email">Email address *</label>
+              <input id="bf-email" name="email" type="email" autoComplete="email" required maxLength={254} />
+            </div>
+            <div className="field-block">
+              <label htmlFor="bf-phone">Mobile number</label>
+              <input id="bf-phone" name="phone" type="tel" autoComplete="tel" maxLength={30} />
+            </div>
           </div>
           <div className="field-block">
             <label htmlFor="bf-notes">Anything we should know? (optional)</label>

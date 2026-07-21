@@ -611,6 +611,109 @@ h2 em,
   margin: 22px 0 20px;
 }
 
+/* ── Public form fields (booking, and any public form) ──────────────── */
+.field-block {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+}
+.field-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 600px) {
+  .field-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+.field-block label {
+  font-family: var(--heading);
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--navy);
+}
+.field-block input:not([type="checkbox"]):not([type="radio"]),
+.field-block select,
+.field-block textarea {
+  width: 100%;
+  border: 1.5px solid rgba(32, 36, 95, 0.18);
+  border-radius: 12px;
+  padding: 13px 15px;
+  font-size: 15px;
+  font-family: var(--sans);
+  color: var(--navy);
+  background: #fbfdff;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.field-block input:focus,
+.field-block select:focus,
+.field-block textarea:focus {
+  outline: none;
+  border-color: var(--sky);
+  box-shadow: 0 0 0 3px rgba(80, 188, 232, 0.2);
+  background: #fff;
+}
+.field-block textarea {
+  resize: vertical;
+  min-height: 96px;
+}
+.field-help {
+  font-size: 12.5px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+.field-error {
+  font-size: 13px;
+  color: #a6294f;
+  margin: 0;
+}
+.field-block.checkbox-block {
+  margin-bottom: 12px;
+}
+.checkbox-block .checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  font-family: var(--sans);
+  font-weight: 400;
+  font-size: 14px;
+  color: #3a3f5e;
+  cursor: pointer;
+  line-height: 1.5;
+}
+.checkbox-block .checkbox-label input[type="checkbox"] {
+  margin-top: 2px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--sky-deep);
+  flex: none;
+}
+.checkbox-block .checkbox-label a {
+  color: var(--sky-deep);
+  font-weight: 600;
+}
+
+/* Booking summary card — clearer, on-brand */
+.book-summary-box {
+  background: var(--tint-sky);
+  border: 1px solid rgba(80, 188, 232, 0.35);
+  border-radius: 14px;
+  padding: 18px 20px;
+  margin: 6px 0 22px;
+  font-size: 14.5px;
+  line-height: 1.7;
+  color: #3a3f5e;
+}
+.book-summary-box strong {
+  font-family: var(--heading);
+  font-weight: 600;
+  color: var(--navy);
+  font-size: 16px;
+}
+
 /* ── Patient reviews (iWantGreatCare) ───────────────────────────────── */
 .reviews-band {
   padding: 90px 0;
