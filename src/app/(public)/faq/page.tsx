@@ -3,117 +3,123 @@ import Link from "next/link";
 import "@/styles/info-pages.css";
 
 export const metadata: Metadata = {
-  title: "Frequently asked questions | Sheffield Dermatology",
+  title: "FAQs | Private Dermatologist Sheffield",
   description:
-    "Answers to common questions about booking, appointments, video consultations, fees, insurance, the patient portal and the AI scribe at Sheffield Dermatology.",
+    "Answers to common questions about booking, video consultations, fees, insurance, referrals and locations for private dermatology in Sheffield with Dr Vinod Elangasinghe.",
+  alternates: { canonical: "/faq" },
+  openGraph: {
+    title: "Frequently asked questions | Sheffield Dermatology",
+    description: "Common questions about appointments, fees, insurance and locations.",
+    type: "website",
+    locale: "en_GB",
+  },
 };
 
-const FAQS: { q: string; a: React.ReactNode }[] = [
+// `text` is the plain-text answer used for FAQPage schema; `a` is the rendered
+// answer (with links) shown on the page.
+const FAQS: { q: string; text: string; a: React.ReactNode }[] = [
   {
     q: "Do I need a referral from my GP?",
+    text:
+      "For self-pay private appointments you do not usually need a GP referral. If you are claiming through private medical insurance, your insurer may require one, so please check with them first.",
     a: (
       <p>
-        For self-pay private appointments you do not usually need a GP referral — you can book
-        directly. If you are claiming through private medical insurance, your insurer may require a
-        referral, so please check with them first. See our <Link href="/insurance">insurance
-        page</Link>.
+        For self-pay private appointments you do not usually need a GP referral — you can request
+        one directly. If you are claiming through private medical insurance, your insurer may
+        require a referral, so please check with them first. See our{" "}
+        <Link href="/insurance">insurance page</Link>.
       </p>
     ),
   },
   {
     q: "How do I book an appointment?",
+    text:
+      "Send an appointment request through the website or call the clinic. The clinic then contacts you to confirm a date, time and location.",
     a: (
       <p>
-        You can <Link href="/book">book online</Link> in a few minutes. Choose your appointment
-        type, pick from the available times and enter your details. You will receive a confirmation
-        by email.
+        Send an <Link href="/book">appointment request</Link> in about a minute, or call the clinic
+        on <a href="tel:+447539578959">+44 7539 578959</a>. The clinic will then contact you to
+        confirm a date, time and location that suit you.
       </p>
     ),
   },
   {
     q: "Can I have a video consultation instead of coming in?",
+    text:
+      "Yes. Video consultations are available for discussion, follow-up and many assessments. Some skin concerns are better examined in person, and Dr Elangasinghe will advise if an in-person visit is recommended.",
     a: (
       <p>
-        Yes. Video consultations are available for discussion, follow-up and many assessments.
-        Some skin concerns are better examined in person, and Dr Vinod Elangasinghe will advise if
-        an in-person visit is recommended. See <Link href="/patient-information">patient
+        Yes. Video consultations are available for discussion, follow-up and many assessments. Some
+        skin concerns are better examined in person, and Dr Vinod Elangasinghe will advise if an
+        in-person visit is recommended. See <Link href="/patient-information">patient
         information</Link> for how video visits work.
       </p>
     ),
   },
   {
     q: "How much will my appointment cost?",
+    text:
+      "A new consultation is £450 and a follow-up is £250 (£300 at the Manchester location). Procedure costs depend on the treatment and are always explained and agreed before anything goes ahead.",
     a: (
       <p>
-        You will always know the fee before your appointment goes ahead. Consultation fees are
-        confirmed when you book, and any procedure is discussed with you — including its cost —
-        first. See our <Link href="/fees">fees page</Link>.
+        A new consultation is <strong>£450</strong> and a follow-up is <strong>£250</strong> (£300
+        at the Manchester location). The cost of any procedure depends on the treatment and is always
+        explained and agreed with you first. See our <Link href="/fees">fees page</Link>.
       </p>
     ),
   },
   {
     q: "What should I bring or prepare?",
+    text:
+      "Bring a list of any medication and skincare you use, note when your concern started, and avoid heavy make-up over the area on the day. Insured patients should bring their membership number and authorisation code.",
     a: (
       <p>
-        Bring a list of any medication and skincare you use, and note when your concern started.
-        For skin concerns, avoid heavy make-up over the area on the day. More detail is on the{" "}
+        Bring a list of any medication and skincare you use, and note when your concern started. For
+        skin concerns, avoid heavy make-up over the area on the day. More detail is on the{" "}
         <Link href="/patient-information">patient information</Link> page.
       </p>
     ),
   },
   {
     q: "How do I change or cancel my appointment?",
+    text:
+      "Contact the clinic as early as you can if you need to change or cancel, so the time can be offered to another patient.",
     a: (
       <p>
-        You can manage appointments in the <Link href="/patient">patient portal</Link>, or contact
-        the clinic. Please give as much notice as possible — see our{" "}
+        Please <Link href="/contact">contact the clinic</Link> as early as you can if you need to
+        change or cancel, so we can offer the time to another patient. See our{" "}
         <Link href="/cancellation-policy">cancellation policy</Link>.
       </p>
     ),
   },
   {
-    q: "Is my information kept private?",
-    a: (
-      <p>
-        Yes. Your clinical records are held securely in the clinic&rsquo;s approved system, and the
-        patient portal lets you manage care without sharing sensitive details by email or text.
-        Read our <Link href="/privacy">privacy notice</Link>.
-      </p>
-    ),
-  },
-  {
-    q: "What is the AI scribe, and do I have to agree to it?",
-    a: (
-      <p>
-        With your agreement, an AI-assisted scribe can help draft the notes for your consultation.
-        It is entirely optional — you can say no, or change your mind, and it will not affect your
-        care. Your clinician reviews and approves every note. Read more on our{" "}
-        <Link href="/ai-scribe">AI scribe information</Link> page.
-      </p>
-    ),
-  },
-  {
     q: "Can you tell me if a mole is serious over email?",
+    text:
+      "No — a mole or skin lesion needs to be examined properly to be assessed safely. If something is changing, bleeding or growing quickly, arrange a prompt review or speak to your GP.",
     a: (
       <p>
-        No — a mole or skin lesion needs to be examined properly to be assessed safely. Please book
-        an <Link href="/conditions/mole-assessment">assessment</Link>. If something is changing,
-        bleeding or growing quickly, arrange a prompt review or speak to your GP.
+        No — a mole or skin lesion needs to be examined properly to be assessed safely. Please
+        request a <Link href="/conditions/mole-assessment">mole assessment</Link>. If something is
+        changing, bleeding or growing quickly, arrange a prompt review or speak to your GP.
       </p>
     ),
   },
   {
     q: "What if my problem is urgent?",
+    text:
+      "This clinic is not an emergency service and is not monitored around the clock. In an emergency call 999. For urgent advice that is not an emergency, call NHS 111 or contact your GP.",
     a: (
       <p>
-        This clinic and its portal are not an emergency service and are not monitored around the
-        clock. In an emergency call 999. For urgent advice that is not an emergency, call NHS 111
-        or contact your GP. See <Link href="/urgent-help">urgent medical help</Link>.
+        This clinic is not an emergency service and is not monitored around the clock. In an
+        emergency call 999. For urgent advice that is not an emergency, call NHS 111 or contact your
+        GP. See <Link href="/urgent-help">urgent medical help</Link>.
       </p>
     ),
   },
   {
     q: "Do you see children?",
+    text:
+      "Yes — Dr Elangasinghe provides dermatology consultations for both adults and children, including paediatric skin, hair and nail concerns.",
     a: (
       <p>
         Yes — Dr Elangasinghe provides dermatology consultations for both adults and children. If
@@ -123,21 +129,38 @@ const FAQS: { q: string; a: React.ReactNode }[] = [
     ),
   },
   {
-    q: "Where is the clinic?",
+    q: "Where are the clinics?",
+    text:
+      "Dr Elangasinghe consults at Thornbury Hospital in Sheffield and Alexandra Hospital in Manchester, and offers video consultations.",
     a: (
       <p>
-        The clinic is in Sheffield. The full address and directions are on the{" "}
-        <Link href="/contact">contact page</Link>.
+        Dr Elangasinghe consults at <strong>Thornbury Hospital, Sheffield</strong> and{" "}
+        <strong>Alexandra Hospital, Manchester</strong>, and offers video consultations. Full
+        addresses are on the <Link href="/contact">contact page</Link>.
       </p>
     ),
   },
 ];
 
 export default function FaqPage() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.text },
+    })),
+  };
+
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
       <section className="page-hero">
         <div className="container">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span>FAQs</span>
+          </nav>
           <div className="eyebrow">
             <span></span> FAQs
           </div>

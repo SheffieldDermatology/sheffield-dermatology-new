@@ -45,7 +45,8 @@ export default async function SiteFooter() {
             <Link href="/conditions">Conditions &amp; care</Link>
             <Link href="/about">About Dr Elangasinghe</Link>
             <Link href="/fees">Fees</Link>
-            <Link href="/book">Book online</Link>
+            <Link href="/faq">FAQs</Link>
+            <Link href="/book">Book appointment</Link>
             <Link href="/urgent-help">Urgent medical help</Link>
           </div>
         </div>
