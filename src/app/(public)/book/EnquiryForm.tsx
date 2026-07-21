@@ -3,6 +3,7 @@
 import { useActionState } from "react";
 import Link from "next/link";
 import { submitBookingEnquiry, type EnquiryState } from "@/server/enquiry";
+import { CLINIC } from "@/lib/site-config";
 
 interface ServiceOption {
   slug: string;
@@ -46,6 +47,13 @@ export default function EnquiryForm({ services }: { services: ServiceOption[] })
         Tell us what you need and when suits you. The clinic will contact you to confirm. Please
         don&rsquo;t include detailed medical history — share that at your appointment.
       </p>
+
+      <div className="enquiry-call">
+        <span>Prefer to call?</span>
+        <a href={`tel:${CLINIC.phone.replace(/\s+/g, "")}`}>{CLINIC.phone}</a>
+        <i aria-hidden="true">·</i>
+        <a href={`mailto:${CLINIC.email}`}>{CLINIC.email}</a>
+      </div>
 
       {state?.error && (
         <div className="alert alert-error" role="alert">
