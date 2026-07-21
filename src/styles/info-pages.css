@@ -108,15 +108,17 @@
 }
 
 /* ── Consultant portrait photo (About page) — square frame ──────────── */
+/* Shown at a modest size (no upscaling of the 455x280 source) so it stays
+   naturally crisp without artificial sharpening. */
 .portrait-photo {
   display: block;
   width: 100%;
-  max-width: 420px;
+  max-width: 300px;
   aspect-ratio: 1 / 1;
   height: auto;
   object-fit: cover;
-  object-position: 50% 30%;
-  border-radius: 24px;
+  object-position: 50% 28%;
+  border-radius: 22px;
   box-shadow: var(--shadow);
   background: var(--mist);
 }

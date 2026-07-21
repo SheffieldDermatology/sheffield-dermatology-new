@@ -8,6 +8,11 @@
  * brand.css so it overrides them. Adapted, not copied.
  */
 :root {
+  /* public.css redefines --serif to Newsreader (now removed); force every
+     var(--serif)/var(--sans) usage to Poppins so the whole public site is
+     typographically consistent with the headings. */
+  --serif: var(--font-heading), "Poppins", "DM Sans", Arial, sans-serif;
+  --sans: var(--font-heading), "Poppins", "DM Sans", Arial, sans-serif;
   --navy: #20245f;
   --navy-deep: #181b51;
   --sky: #50bce8;
@@ -862,6 +867,14 @@ h2 em,
   font-size: 14px;
   line-height: 1.6;
   margin: 0;
+}
+.footer-contact p {
+  margin-top: 4px;
+}
+.footer-contact p strong {
+  color: #fff;
+  font-family: var(--heading);
+  font-weight: 600;
 }
 .footer-contact a:hover,
 .footer-links-col a:hover {

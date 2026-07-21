@@ -239,7 +239,7 @@ export default async function HomePage() {
               {clinic.email ? <a href={`mailto:${clinic.email}`}>{clinic.email}</a> : <p>Use the contact form</p>}
             </div>
             <div>
-              <small>Consultation locations</small>
+              <small>Consultation offices</small>
               {clinic.locations && clinic.locations.length > 0 ? (
                 clinic.locations.map((loc) => (
                   <p key={loc.name} style={{ margin: "0 0 8px" }}>

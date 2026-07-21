@@ -23,18 +23,20 @@ export default async function SiteFooter() {
           <div className="footer-contact">
             <span className="footer-heading">Contact</span>
             {clinic.phone ? (
-              <a href={`tel:${clinic.phone.replace(/\s+/g, "")}`}>Call: {clinic.phone}</a>
+              <a href={`tel:${clinic.phone.replace(/\s+/g, "")}`}>{clinic.phone}</a>
             ) : (
               <Link href="/contact">Contact the clinic</Link>
             )}
-            {clinic.email ? <a href={`mailto:${clinic.email}`}>Email: {clinic.email}</a> : null}
-            {clinic.locations && clinic.locations[0] ? (
-              <p>
-                {clinic.locations[0].name}
-                <br />
-                {clinic.locations[0].lines.join(", ")}
-              </p>
-            ) : null}
+            {clinic.email ? <a href={`mailto:${clinic.email}`}>{clinic.email}</a> : null}
+            {clinic.locations && clinic.locations.length > 0
+              ? clinic.locations.map((loc) => (
+                  <p key={loc.name}>
+                    <strong>{loc.name}</strong>
+                    <br />
+                    {loc.lines.join(", ")}
+                  </p>
+                ))
+              : null}
           </div>
 
           <div className="footer-links-col">
