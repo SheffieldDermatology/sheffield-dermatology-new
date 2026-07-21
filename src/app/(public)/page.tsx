@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
 import { getClinicInfo } from "@/lib/clinic-info";
 import Reviews from "@/components/public/Reviews";
-import portrait from "../../../public/assets/dr-vinod-elangasinghe.jpg";
 
 export const metadata: Metadata = {
   title: "Sheffield Dermatology | Consultant-led skin care",
@@ -115,10 +113,19 @@ export default async function HomePage() {
               </Link>
             </p>
           </div>
-          <div className="portrait-ring reveal delay-1">
-            <div className="ring-bg" aria-hidden="true"></div>
-            <Image src={portrait} alt="Dr Vinod Elangasinghe, Consultant Dermatologist" width={455} height={280} />
-            <Link className="ring-cta" href="/book">
+          <div className="welcome-visual reveal delay-1">
+            <div className="wv-ring" aria-hidden="true"></div>
+            <div className="wv-circle">
+              <span className="wv-stars" aria-hidden="true">★★★★★</span>
+              <strong>5.0 / 5</strong>
+              <small>Rated by patients on iWantGreatCare</small>
+              <ul className="wv-points">
+                <li>Consultant-led care</li>
+                <li>Adults &amp; children</li>
+                <li>Recognised by Bupa</li>
+              </ul>
+            </div>
+            <Link className="wv-cta" href="/book">
               Book your consultation
             </Link>
           </div>
