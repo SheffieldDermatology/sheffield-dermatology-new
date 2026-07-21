@@ -88,9 +88,8 @@ export default async function ContactPage() {
               )}
             </div>
             <div className="tbc-panel">
-              <strong>Some details are still being finalised.</strong> Contact details shown as
-              &ldquo;to be confirmed&rdquo; will be published here as soon as they are ready. In
-              the meantime, the contact form below reaches the clinic team directly.
+              <strong>Prefer to talk?</strong> Call or email us using the details above, or send a
+              message with the form and the clinic team will come back to you.
             </div>
           </div>
 
