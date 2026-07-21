@@ -6,9 +6,14 @@ on:
   pull_request:
     branches: [main]
 
+# Lean CI for the public "info + enquiry" deployment: verify the code lints,
+# type-checks and builds the way Vercel deploys it (SITE_ONLY, no database).
+# The full platform's heavier suite (database integration, Playwright e2e,
+# migration-drift checks) returns when the full app is deployed — see
+# tests/ and TESTING.md.
 jobs:
   quality:
-    name: Lint, typecheck & unit/integration tests
+    name: Lint, typecheck & build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -21,62 +26,12 @@ jobs:
         run: npm run lint
       - name: Typecheck
         run: npm run typecheck
-      - name: Generate migrations are up to date
-        run: npm run db:generate && git diff --exit-code drizzle || (echo "Run npm run db:generate and commit the result" && exit 1)
       - name: Unit & integration tests
         run: npm test
         env:
           NODE_ENV: test
-
-  build:
-    name: Production build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Build
+      - name: Production build (lean site)
         run: npm run build
         env:
-          # A build-time secret is required only for production runtime; a
-          # throwaway value lets the build compile without real secrets.
-          SESSION_SECRET: build-time-placeholder-secret-not-used-at-runtime-000
-
-  e2e:
-    name: End-to-end (Playwright)
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - name: Install Playwright browser
-        run: npx playwright install --with-deps chromium
-      - name: Run e2e
-        run: npm run test:e2e
-        env:
-          CI: "true"
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: playwright-report
-          path: playwright-report/
-          retention-days: 7
-
-  dependency-audit:
-    name: Dependency audit (non-blocking)
-    runs-on: ubuntu-latest
-    continue-on-error: true
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-      - run: npm ci
-      - run: npm run audit:deps
+          SITE_ONLY: "1"
+          APP_ORIGIN: https://sheffielddermatology.com
