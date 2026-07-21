@@ -100,10 +100,21 @@ h2 em,
 }
 
 /* ── Header: circular action chips + dropdown nav ───────────────────── */
+/* Pin the call/notice bar AND the header together at the top on scroll. */
+.site-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
 .site-header {
+  position: static;
   background: rgba(255, 255, 255, 0.96);
   border-bottom: 1px solid rgba(32, 36, 95, 0.08);
   backdrop-filter: saturate(140%) blur(12px);
+}
+.notice-bar {
+  position: relative;
+  z-index: 61;
 }
 .header-inner {
   height: auto;

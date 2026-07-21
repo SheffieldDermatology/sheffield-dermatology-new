@@ -18,7 +18,7 @@ export default async function SiteHeader() {
   const telHref = clinic.phone ? `tel:${clinic.phone.replace(/\s+/g, "")}` : "/contact";
 
   return (
-    <>
+    <div className="site-topbar">
       <div className="notice-bar">
         <div className="container notice-inner">
           <span>Consultant-led dermatology in Sheffield · Adults &amp; children</span>
@@ -92,6 +92,6 @@ export default async function SiteHeader() {
           </nav>
         </div>
       </header>
-    </>
+    </div>
   );
 }
