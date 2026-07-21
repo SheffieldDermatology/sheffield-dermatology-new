@@ -107,14 +107,16 @@
   .contact-form-panel { padding: 28px 22px; }
 }
 
-/* ── Consultant portrait photo (About page) ─────────────────────────── */
+/* ── Consultant portrait photo (About page) — square frame ──────────── */
 .portrait-photo {
   display: block;
   width: 100%;
+  max-width: 420px;
+  aspect-ratio: 1 / 1;
   height: auto;
-  max-height: 560px;
   object-fit: cover;
-  border-radius: 18px;
+  object-position: 50% 30%;
+  border-radius: 24px;
   box-shadow: var(--shadow);
   background: var(--mist);
 }

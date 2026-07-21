@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { getClinicInfo } from "@/lib/clinic-info";
+import Reviews from "@/components/public/Reviews";
 import portrait from "../../../public/assets/dr-vinod-elangasinghe.jpg";
 
 export const metadata: Metadata = {
@@ -26,9 +27,9 @@ const SERVICES = [
 ];
 
 const ROUTES = [
-  { href: "/conditions/mole-assessment", title: "Worried about a mole?", cls: "route-card-a" },
-  { href: "/conditions/acne-rosacea", title: "Acne or rosacea?", cls: "route-card-b" },
-  { href: "/conditions/hair-scalp-nails", title: "Hair, scalp or nails?", cls: "route-card-c" },
+  { href: "/conditions/mole-assessment", title: "Worried about a mole?", cls: "route-card-a", icon: "◉" },
+  { href: "/conditions/acne-rosacea", title: "Acne or rosacea?", cls: "route-card-b", icon: "✦" },
+  { href: "/conditions/hair-scalp-nails", title: "Hair, scalp or nails?", cls: "route-card-c", icon: "❧" },
 ];
 
 export default async function HomePage() {
@@ -83,7 +84,9 @@ export default async function HomePage() {
         <div className="route-cards">
           {ROUTES.map((r) => (
             <Link key={r.href} className={`route-card ${r.cls}`} href={r.href}>
-              <span className="route-top" aria-hidden="true"></span>
+              <span className="route-icon" aria-hidden="true">
+                {r.icon}
+              </span>
               <span className="route-chip">Book now</span>
               <h3>{r.title}</h3>
             </Link>
@@ -121,6 +124,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Patient reviews (iWantGreatCare) ──────────────────────── */}
+      <Reviews />
 
       {/* ── Conditions grid ───────────────────────────────────────── */}
       <section className="intro section" id="care" style={{ paddingTop: "40px" }}>

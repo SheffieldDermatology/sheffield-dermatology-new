@@ -356,10 +356,10 @@ h2 em,
 }
 .route-card {
   position: relative;
-  min-height: 260px;
+  min-height: 240px;
   display: flex;
   align-items: flex-end;
-  padding: 26px;
+  padding: 28px;
   overflow: hidden;
   color: #fff;
   text-decoration: none;
@@ -370,23 +370,34 @@ h2 em,
   position: absolute;
   inset: 0;
   z-index: -1;
-  clip-path: polygon(0 38%, 100% 0, 100% 100%, 0 100%);
 }
 .route-card-a::before {
-  background: linear-gradient(140deg, var(--sky), var(--sky-deep));
+  background: linear-gradient(150deg, var(--sky), var(--sky-deep));
 }
 .route-card-b::before {
-  background: linear-gradient(140deg, #2b5f9c, var(--navy));
+  background: linear-gradient(150deg, #2b3277, var(--navy));
 }
 .route-card-c::before {
-  background: linear-gradient(140deg, var(--coral), var(--coral-deep));
+  background: linear-gradient(150deg, var(--coral), var(--coral-deep));
 }
-.route-card .route-top {
+.route-icon {
   position: absolute;
-  inset: 0 0 auto 0;
-  height: 46%;
-  background: var(--tint-sky);
-  z-index: -2;
+  left: 28px;
+  top: 26px;
+  font-size: 30px;
+  opacity: 0.55;
+}
+.route-card::after {
+  /* soft decorative circle motif */
+  content: "";
+  position: absolute;
+  right: -40px;
+  bottom: -40px;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.18);
+  z-index: -1;
 }
 .route-card h3 {
   font-family: var(--heading);
@@ -465,11 +476,14 @@ h2 em,
 }
 .portrait-ring img {
   position: relative;
-  width: 78%;
-  /* Source headshot is 455px wide — never render it larger, so it stays sharp. */
-  max-width: 420px;
+  width: 66%;
+  max-width: 340px;
+  /* Square frame: crop the landscape headshot to a square centred on the face. */
+  aspect-ratio: 1 / 1;
   height: auto;
-  border-radius: 24px;
+  object-fit: cover;
+  object-position: 50% 32%;
+  border-radius: 28px;
   z-index: 2;
   box-shadow: 0 24px 60px rgba(32, 36, 95, 0.22);
 }
@@ -549,6 +563,94 @@ h2 em,
   margin: 22px 0 20px;
 }
 
+/* ── Patient reviews (iWantGreatCare) ───────────────────────────────── */
+.reviews-band {
+  padding: 90px 0;
+  background: linear-gradient(180deg, var(--tint-sky), #fff);
+}
+.reviews-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.reviews-head h2 {
+  margin: 10px 0 0;
+}
+.reviews-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  background: #fff;
+  border: 1px solid rgba(32, 36, 95, 0.1);
+  border-radius: 16px;
+  padding: 18px 22px;
+  box-shadow: 0 16px 40px rgba(32, 36, 95, 0.1);
+}
+.reviews-badge strong {
+  font-family: var(--heading);
+  font-size: 28px;
+  color: var(--navy);
+  line-height: 1;
+}
+.reviews-badge small {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+.reviews-badge a {
+  color: var(--sky-deep);
+  font-weight: 600;
+}
+.stars {
+  color: #f5a623;
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+.review-card {
+  background: #fff;
+  border: 1px solid rgba(32, 36, 95, 0.09);
+  border-radius: 18px;
+  padding: 26px;
+  box-shadow: 0 14px 34px rgba(32, 36, 95, 0.07);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.review-card blockquote {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #3a3f5e;
+}
+.review-card figcaption {
+  font-size: 12px;
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+.reviews-foot {
+  margin-top: 26px;
+  font-size: 13px;
+  color: var(--ink-soft);
+  text-align: center;
+}
+.reviews-foot a {
+  color: var(--sky-deep);
+  font-weight: 600;
+}
+@media (max-width: 900px) {
+  .reviews-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── Angled dark footer ─────────────────────────────────────────────── */
 .site-footer {
   position: relative;
@@ -561,9 +663,16 @@ h2 em,
   border-bottom: 1px solid rgba(255, 255, 255, 0.12);
   padding-bottom: 28px;
 }
+/* The logo PNG has a white (opaque) background, so it sits on a white chip in
+   the dark footer rather than being colour-filtered (which would blank it). */
+.footer-brand {
+  display: inline-flex;
+  background: #fff;
+  padding: 14px 18px;
+  border-radius: 14px;
+}
 .footer-brand .brand-logo {
-  filter: brightness(0) invert(1);
-  opacity: 0.95;
+  width: 190px;
 }
 .footer-cols {
   display: grid;
