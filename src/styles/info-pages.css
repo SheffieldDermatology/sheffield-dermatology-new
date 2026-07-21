@@ -122,3 +122,21 @@
   box-shadow: var(--shadow);
   background: var(--mist);
 }
+
+/* Contact page: the clinic-details column is narrow, so stack the details in a
+   single column at a readable size instead of the home page's 2-col layout. */
+.contact-page-grid .contact-details {
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+.contact-page-grid .contact-details a,
+.contact-page-grid .contact-details p {
+  font-family: var(--sans);
+  font-size: 16px;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.contact-page-grid .contact-details p strong {
+  font-size: 16px;
+  color: var(--ink);
+}
