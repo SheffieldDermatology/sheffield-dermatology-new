@@ -239,11 +239,15 @@ export default async function HomePage() {
               {clinic.email ? <a href={`mailto:${clinic.email}`}>{clinic.email}</a> : <p>Use the contact form</p>}
             </div>
             <div>
-              <small>Clinic</small>
-              {clinic.locations && clinic.locations[0] ? (
-                <p>
-                  {clinic.locations[0].name}, {clinic.locations[0].lines.join(", ")}
-                </p>
+              <small>Consultation locations</small>
+              {clinic.locations && clinic.locations.length > 0 ? (
+                clinic.locations.map((loc) => (
+                  <p key={loc.name} style={{ margin: "0 0 8px" }}>
+                    <strong>{loc.name}</strong>
+                    <br />
+                    {loc.lines.join(", ")}
+                  </p>
+                ))
               ) : (
                 <p>Sheffield — address to be confirmed</p>
               )}

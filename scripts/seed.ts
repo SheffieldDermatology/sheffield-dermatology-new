@@ -250,6 +250,23 @@ async function main() {
     })
     .onConflictDoNothing();
 
+  // ── Owner-confirmed clinic contact details (public business info) ───
+  // These were confirmed by the clinic owner and are real, not demo data.
+  // Kept here so a database reset restores them in development; in production
+  // they are entered via Admin → Clinic settings.
+  const clinicSettings: [string, unknown][] = [
+    ["clinic.phone", "+44 7539 578959"],
+    ["clinic.email", "contact@sheffielddermatology.com"],
+    ["clinic.locations", [
+      { name: "Thornbury Hospital", lines: ["312 Fulwood Road", "Sheffield", "S10 3BR"] },
+      { name: "Alexandra Hospital", lines: ["Mill Lane, Cheadle", "Cheshire", "SK8 2PX"] },
+    ]],
+    ["clinic.address_lines", ["Thornbury Hospital", "312 Fulwood Road", "Sheffield", "S10 3BR"]],
+  ];
+  for (const [key, value] of clinicSettings) {
+    await db.insert(settings).values({ key, value }).onConflictDoNothing();
+  }
+
   // ── Owner-input checklist (mirrors OWNER_INPUTS.md) ────────────────
   const inputs: (typeof ownerInputs.$inferInsert)[] = [
     { key: "clinic.legal_entity", section: "Clinic identity", title: "Legal entity / data controller name", why: "UK GDPR requires a named data controller.", whereShown: "Privacy notice, terms, invoices", blocksProduction: true, safeDefault: "None — must be supplied" },
