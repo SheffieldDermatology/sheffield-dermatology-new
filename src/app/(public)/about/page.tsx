@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import "@/styles/info-pages.css";
-import portrait from "../../../../public/assets/dr-vinod-elangasinghe.jpg";
+import portrait from "../../../../public/assets/dr-vinod-elangasinghe-hd.jpg";
 
 export const metadata: Metadata = {
   title: "About Dr Vinod Elangasinghe | Sheffield Dermatology",
@@ -45,8 +45,8 @@ export default function AboutPage() {
               src={portrait}
               alt="Dr Vinod Elangasinghe, Consultant Dermatologist"
               className="portrait-photo"
-              width={455}
-              height={280}
+              width={840}
+              height={840}
               priority
             />
             <div className="portrait-caption">
