@@ -19,7 +19,12 @@ const enquirySchema = z.object({
   email: z.string().trim().toLowerCase().email("Please enter a valid email address.").max(254),
   phone: z.string().trim().max(40).optional(),
   service: z.string().trim().min(1, "Please choose the appointment you need.").max(120),
-  visit: z.enum(["In person", "Video"]).catch("In person"),
+  location: z.string().trim().max(80).optional(),
+  contactMethod: z.string().trim().max(20).optional(),
+  payer: z.enum(["Self-pay", "Insured"]).catch("Self-pay"),
+  insurer: z.string().trim().max(80).optional(),
+  policyNumber: z.string().trim().max(60).optional(),
+  preAuth: z.string().trim().max(60).optional(),
   preferred: z.string().trim().max(600).optional(),
   message: z.string().trim().max(3000).optional(),
 });
@@ -79,7 +84,12 @@ export async function submitBookingEnquiry(
     email: formData.get("email"),
     phone: formData.get("phone") || undefined,
     service: formData.get("service"),
-    visit: formData.get("visit"),
+    location: formData.get("location") || undefined,
+    contactMethod: formData.get("contactMethod") || undefined,
+    payer: formData.get("payer"),
+    insurer: formData.get("insurer") || undefined,
+    policyNumber: formData.get("policyNumber") || undefined,
+    preAuth: formData.get("preAuth") || undefined,
     preferred: formData.get("preferred") || undefined,
     message: formData.get("message") || undefined,
   });
@@ -87,20 +97,26 @@ export async function submitBookingEnquiry(
     return { ok: false, error: parsed.error.issues[0]?.message ?? "Please check the form." };
   }
   const d = parsed.data;
-  return deliver({
-    kind: "Booking enquiry",
-    name: d.name,
-    email: d.email,
-    phone: d.phone,
-    lines: [
-      `Appointment: ${d.service}`,
-      `Visit type:  ${d.visit}`,
-      `Preferred days/times: ${d.preferred || "no preference given"}`,
-      "",
-      "Message:",
-      d.message || "(none)",
-    ],
-  });
+  const lines = [
+    `Appointment: ${d.service}`,
+    `Location:    ${d.location || "no preference"}`,
+    `Payment:     ${d.payer}`,
+  ];
+  if (d.payer === "Insured") {
+    lines.push(
+      `  Insurer:        ${d.insurer || "not given"}`,
+      `  Policy number:  ${d.policyNumber || "not given"}`,
+      `  Pre-auth code:  ${d.preAuth || "not given"}`,
+    );
+  }
+  lines.push(
+    `Preferred contact: ${d.contactMethod || "not given"}`,
+    `Preferred days/times: ${d.preferred || "no preference given"}`,
+    "",
+    "Message:",
+    d.message || "(none)",
+  );
+  return deliver({ kind: "Booking enquiry", name: d.name, email: d.email, phone: d.phone, lines });
 }
 
 const contactSchema = z.object({
