@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getClinicInfo } from "@/lib/clinic-info";
+import { SITE_ONLY } from "@/lib/site-config";
+import { submitContactEnquiry } from "@/server/contact";
+import { submitContactMessage } from "@/server/enquiry";
 import ContactForm from "./ContactForm";
 import "@/styles/info-pages.css";
 
@@ -94,7 +97,7 @@ export default async function ContactPage() {
           </div>
 
           <div className="contact-form-panel">
-            <ContactForm />
+            <ContactForm action={SITE_ONLY ? submitContactMessage : submitContactEnquiry} />
           </div>
         </div>
       </section>

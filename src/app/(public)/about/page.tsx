@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import "@/styles/info-pages.css";
+import { CLINICIAN } from "@/lib/site-config";
 import portrait from "../../../../public/assets/dr-vinod-elangasinghe.jpg";
 
 export const metadata: Metadata = {
@@ -73,41 +74,35 @@ export default function AboutPage() {
             <div className="credentials">
               <div>
                 <span>Qualifications</span>
-                <strong>MBBS, MRCP (UK), MRCP (Dermatology, UK), FRCP</strong>
+                <strong>{CLINICIAN.qualifications}</strong>
               </div>
               <div>
                 <span>GMC registration</span>
-                <strong>6027383</strong>
+                <strong>{CLINICIAN.gmcNumber}</strong>
               </div>
               <div>
                 <span>Specialty</span>
                 <strong>Consultant Dermatologist (adult &amp; paediatric)</strong>
               </div>
               <div>
-                <span>Memberships</span>
-                <strong>Co-editor, Clinical and Experimental Dermatology journal</strong>
+                <span>Languages</span>
+                <strong>{CLINICIAN.languages.join(", ")}</strong>
               </div>
             </div>
             <p style={{ marginTop: 4 }}>
-              <strong>Positions held</strong>
+              <strong>Professional memberships</strong>
             </p>
             <ul className="info-list">
-              <li>Consultant Dermatologist, Chesterfield Royal Hospital NHS FT — 2011–2016</li>
-              <li>Skin Cancer MDT Head, North Derbyshire, Chesterfield — 2014–2016</li>
-              <li>Vice Chair, Skin Cancer NSSG, South Yorkshire and Humberside — 2014–2016</li>
-              <li>Honorary Senior Clinical Lecturer, University of Sheffield — 2012–2016</li>
+              {CLINICIAN.memberships.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
             </ul>
-            <p className="tbc-badge" style={{ marginTop: 4 }}>
-              Details to confirm before launch
-            </p>
-            <p>
-              These professional details were compiled from Dr Elangasinghe&rsquo;s existing public
-              profiles and should be confirmed by him, and checked against the{" "}
+            <p style={{ marginTop: 10, fontSize: "13px", color: "#747a98" }}>
+              You can verify Dr Elangasinghe&rsquo;s registration on the{" "}
               <a href="https://www.gmc-uk.org/registration-and-licensing/the-medical-register" rel="noopener noreferrer" target="_blank">
                 GMC public register
               </a>
-              , before the site goes live. You can check any doctor&rsquo;s registration there
-              yourself.
+              .
             </p>
           </div>
         </div>

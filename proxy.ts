@@ -9,8 +9,21 @@ import type { NextRequest } from "next/server";
 
 const SESSION_COOKIE = "sd_session";
 
+const SITE_ONLY = process.env.SITE_ONLY === "1" || process.env.SITE_ONLY === "true";
+
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
+
+  // Lean "info + enquiry" deployment: the patient portal, staff workspace and
+  // admin are not part of this launch. Send those paths home rather than
+  // letting them touch the (absent) database.
+  if (SITE_ONLY && /^\/(patient|staff|admin)(\/|$)/.test(pathname)) {
+    const url = request.nextUrl.clone();
+    url.pathname = "/";
+    url.search = "";
+    return NextResponse.redirect(url);
+  }
+
   const hasSessionCookie = request.cookies.has(SESSION_COOKIE);
 
   const isPatientArea =

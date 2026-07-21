@@ -3,6 +3,7 @@ import Link from "next/link";
 import { asc, eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { services } from "@/lib/db/schema";
+import { SITE_ONLY, SERVICES } from "@/lib/site-config";
 import "@/styles/info-pages.css";
 
 export const metadata: Metadata = {
@@ -17,12 +18,18 @@ function formatFee(pricePence: number | null): { text: string; tbc: boolean } {
 }
 
 export default async function FeesPage() {
-  const db = getDb();
-  const rows = await db
-    .select()
-    .from(services)
-    .where(eq(services.active, true))
-    .orderBy(asc(services.sortOrder));
+  const rows = SITE_ONLY
+    ? SERVICES.map((s) => ({
+        id: s.slug,
+        name: s.name,
+        durationMinutes: s.durationMinutes,
+        pricePence: null as number | null,
+      }))
+    : await getDb()
+        .select()
+        .from(services)
+        .where(eq(services.active, true))
+        .orderBy(asc(services.sortOrder));
 
   return (
     <>

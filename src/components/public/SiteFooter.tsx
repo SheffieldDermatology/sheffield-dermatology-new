@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { getClinicInfo } from "@/lib/clinic-info";
+import { SITE_ONLY } from "@/lib/site-config";
 import logo from "../../../public/assets/sheffield-dermatology-logo.png";
 
 export default async function SiteFooter() {
@@ -58,8 +59,8 @@ export default async function SiteFooter() {
           <Link href="/accessibility">Accessibility</Link>
           <Link href="/terms">Terms</Link>
           <Link href="/cancellation-policy">Cancellations</Link>
-          <Link href="/patient">Patient portal</Link>
-          <Link href="/staff">Staff</Link>
+          {!SITE_ONLY && <Link href="/patient">Patient portal</Link>}
+          {!SITE_ONLY && <Link href="/staff">Staff</Link>}
         </nav>
       </div>
     </footer>

@@ -3,23 +3,18 @@ import { asc, eq } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { services, clinicians } from "@/lib/db/schema";
 import { bookingLiveEnabled } from "@/lib/booking/provider";
+import { SITE_ONLY, SERVICES } from "@/lib/site-config";
 import BookingWizard from "./BookingWizard";
+import EnquiryForm from "./EnquiryForm";
 import "@/styles/booking.css";
 
 export const metadata: Metadata = {
   title: "Book an appointment",
   description:
-    "Book a consultant-led dermatology appointment with Dr Vinod Elangasinghe in Sheffield — in person or by video consultation.",
+    "Request a consultant-led dermatology appointment with Dr Vinod Elangasinghe in Sheffield — in person or by video consultation.",
 };
 
 export default async function BookPage() {
-  const db = getDb();
-  const [serviceRows, clinicianRows, live] = await Promise.all([
-    db.select().from(services).where(eq(services.active, true)).orderBy(asc(services.sortOrder)),
-    db.select().from(clinicians).where(eq(clinicians.active, true)),
-    bookingLiveEnabled(),
-  ]);
-
   return (
     <>
       <section className="book-hero">
@@ -27,28 +22,46 @@ export default async function BookPage() {
           <div className="eyebrow">
             <span></span> Appointments
           </div>
-          <h1>Book your appointment</h1>
+          <h1>Request an appointment</h1>
           <p className="page-lead">
-            Choose an appointment type, pick a time that suits you and enter your details. It takes
-            about two minutes.
+            Tell us what you need and the clinic will contact you to confirm a date and time. It
+            takes about a minute.
           </p>
         </div>
       </section>
       <section className="book-wrap">
         <div className="container">
-          <BookingWizard
-            services={serviceRows.map((s) => ({
-              id: s.id,
-              name: s.name,
-              shortDescription: s.shortDescription,
-              durationMinutes: s.durationMinutes,
-              pricePence: s.pricePence,
-            }))}
-            clinicians={clinicianRows.map((c) => ({ id: c.id, fullName: c.fullName, title: c.title }))}
-            bookingLive={live}
-          />
+          {SITE_ONLY ? (
+            <div className="book-shell">
+              <EnquiryForm services={SERVICES.map((s) => ({ slug: s.slug, name: s.name }))} />
+            </div>
+          ) : (
+            <FullBooking />
+          )}
         </div>
       </section>
     </>
+  );
+}
+
+async function FullBooking() {
+  const db = getDb();
+  const [serviceRows, clinicianRows, live] = await Promise.all([
+    db.select().from(services).where(eq(services.active, true)).orderBy(asc(services.sortOrder)),
+    db.select().from(clinicians).where(eq(clinicians.active, true)),
+    bookingLiveEnabled(),
+  ]);
+  return (
+    <BookingWizard
+      services={serviceRows.map((s) => ({
+        id: s.id,
+        name: s.name,
+        shortDescription: s.shortDescription,
+        durationMinutes: s.durationMinutes,
+        pricePence: s.pricePence,
+      }))}
+      clinicians={clinicianRows.map((c) => ({ id: c.id, fullName: c.fullName, title: c.title }))}
+      bookingLive={live}
+    />
   );
 }

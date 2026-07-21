@@ -7,6 +7,7 @@ import { cache } from "react";
 import { inArray } from "drizzle-orm";
 import { getDb } from "@/lib/db";
 import { settings } from "@/lib/db/schema";
+import { SITE_ONLY, CLINIC } from "@/lib/site-config";
 
 export interface ClinicLocation {
   name: string;
@@ -35,6 +36,20 @@ const KEYS = [
 ] as const;
 
 export const getClinicInfo = cache(async (): Promise<ClinicInfo> => {
+  // Lean "info + enquiry" deployment: serve owner-confirmed details from
+  // static config, so the public site needs no database.
+  if (SITE_ONLY) {
+    return {
+      phone: CLINIC.phone,
+      email: CLINIC.email,
+      addressLines: [...CLINIC.locations[0].lines],
+      openingHours: null,
+      legalEntity: null,
+      icoRegistration: null,
+      locations: CLINIC.locations.map((l) => ({ name: l.name, lines: [...l.lines] })),
+    };
+  }
+
   const db = getDb();
   const rows = await db
     .select({ key: settings.key, value: settings.value })

@@ -13,7 +13,7 @@ import { tasks } from "@/lib/db/schema";
 import { recordAudit } from "@/lib/audit";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/security/rate-limit";
 
-export type ContactFormState = { ok: true } | { ok: false; error: string } | null;
+export type ContactFormState = { ok?: boolean; error?: string } | null;
 
 const contactSchema = z.object({
   name: z

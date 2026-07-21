@@ -1,12 +1,12 @@
 "use client";
 
 import { useActionState, useId } from "react";
-import { submitContactEnquiry, type ContactFormState } from "@/server/contact";
 
-const initialState: ContactFormState = null;
+type FormState = { ok?: boolean; error?: string } | null;
+type ContactAction = (state: FormState, formData: FormData) => Promise<FormState>;
 
-export default function ContactForm() {
-  const [state, formAction, isPending] = useActionState(submitContactEnquiry, initialState);
+export default function ContactForm({ action }: { action: ContactAction }) {
+  const [state, formAction, isPending] = useActionState<FormState, FormData>(action, null);
   const statusId = useId();
 
   if (state?.ok) {
