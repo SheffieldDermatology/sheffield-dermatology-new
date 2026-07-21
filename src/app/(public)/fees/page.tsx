@@ -1,40 +1,30 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { asc, eq } from "drizzle-orm";
-import { getDb } from "@/lib/db";
-import { services } from "@/lib/db/schema";
-import { SITE_ONLY, SERVICES } from "@/lib/site-config";
+import { FEES } from "@/lib/site-config";
 import "@/styles/info-pages.css";
 
 export const metadata: Metadata = {
-  title: "Fees | Sheffield Dermatology",
+  title: "Fees | Private Dermatologist Sheffield",
   description:
-    "Consultation fees at Sheffield Dermatology. Fees are confirmed when you book so you always know the cost before your appointment.",
+    "Consultation fees for private dermatology in Sheffield with Dr Vinod Elangasinghe: new consultation £450, follow-up £250. Procedure costs are explained before treatment. Self-pay and insured patients welcome.",
+  alternates: { canonical: "/fees" },
+  openGraph: {
+    title: "Fees | Sheffield Dermatology",
+    description:
+      "Clear consultation fees for private dermatology in Sheffield. Self-pay and insured patients welcome.",
+    type: "website",
+    locale: "en_GB",
+  },
 };
 
-function formatFee(pricePence: number | null): { text: string; tbc: boolean } {
-  if (pricePence === null) return { text: "Confirmed when you book", tbc: true };
-  return { text: `£${(pricePence / 100).toFixed(2)}`, tbc: false };
-}
-
-export default async function FeesPage() {
-  const rows = SITE_ONLY
-    ? SERVICES.map((s) => ({
-        id: s.slug,
-        name: s.name,
-        durationMinutes: s.durationMinutes,
-        pricePence: null as number | null,
-      }))
-    : await getDb()
-        .select()
-        .from(services)
-        .where(eq(services.active, true))
-        .orderBy(asc(services.sortOrder));
-
+export default function FeesPage() {
   return (
     <>
       <section className="page-hero">
         <div className="container">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span>Fees</span>
+          </nav>
           <div className="eyebrow">
             <span></span> Fees
           </div>
@@ -42,83 +32,103 @@ export default async function FeesPage() {
             Clear fees, <em>no surprises.</em>
           </h1>
           <p className="page-lead">
-            You will always know the cost of your appointment before it goes ahead. Fees for any
-            procedure are explained and agreed with you first.
+            You will always know the cost of your appointment before it goes ahead. Consultation
+            fees are shown below; the cost of any procedure is explained and agreed with you first.
           </p>
         </div>
       </section>
 
+      {/* Fee cards */}
       <section className="info-section">
         <div className="container">
-          <div className="fee-table-wrap">
-            <table className="fee-table">
-              <caption>Consultation fees</caption>
-              <thead>
-                <tr>
-                  <th scope="col">Appointment</th>
-                  <th scope="col">Typical length</th>
-                  <th scope="col">Fee</th>
-                </tr>
-              </thead>
-              <tbody>
-                {rows.map((service) => {
-                  const fee = formatFee(service.pricePence);
-                  return (
-                    <tr key={service.id}>
-                      <td>{service.name}</td>
-                      <td>{service.durationMinutes} minutes</td>
-                      <td>
-                        {fee.tbc ? (
-                          <span className="fee-tbc">{fee.text}</span>
-                        ) : (
-                          <span className="fee-amount">{fee.text}</span>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+          <div className="fee-cards">
+            {FEES.map((fee) => (
+              <div key={fee.name} className="fee-card">
+                <div className="fee-card-top">
+                  <h3>{fee.name}</h3>
+                  <span className={fee.price.startsWith("£") ? "fee-price" : "fee-price fee-price--text"}>
+                    {fee.price}
+                  </span>
+                </div>
+                <p>{fee.note}</p>
+              </div>
+            ))}
           </div>
-
           <div className="tbc-panel">
-            <strong>Fees are being finalised.</strong> Consultation and procedure prices are
-            confirmed with you at the point of booking and before any treatment. This page will
-            show the full published fee list once it has been approved. Prices for procedures
-            depend on what is involved and are always discussed in advance.
+            <strong>Procedure costs depend on the treatment required and will always be explained
+            before anything goes ahead.</strong> If a procedure or further test is recommended, you
+            will be given the cost in advance so you can decide with no pressure.
           </div>
         </div>
       </section>
 
+      {/* Self-pay / Insured */}
       <section className="info-section">
-        <div className="container info-columns">
-          <div>
-            <div className="eyebrow">
-              <span></span> Paying
+        <div className="container">
+          <div className="fee-two">
+            <div className="fee-block">
+              <span className="fee-tag">Self-pay patients</span>
+              <h2>Paying for yourself</h2>
+              <ul className="info-list">
+                <li>Book directly — no GP referral is needed for a private appointment.</li>
+                <li>The consultation fee is payable at your appointment.</li>
+                <li>You receive a clear invoice and receipt.</li>
+                <li>Any procedure or treatment is quoted and agreed before it goes ahead.</li>
+              </ul>
+              <Link className="button" href="/book">
+                Request an appointment <span aria-hidden="true">→</span>
+              </Link>
             </div>
-            <h2>Payment &amp; insurance</h2>
+            <div className="fee-block">
+              <span className="fee-tag">Insured patients</span>
+              <h2>Using private insurance</h2>
+              <ul className="info-list">
+                <li>Check your cover and any pre-authorisation with your insurer first.</li>
+                <li>Bring your membership number and authorisation code to your appointment.</li>
+                <li>
+                  Eligible fees can be invoiced to your insurer; any excess or shortfall is your
+                  responsibility.
+                </li>
+                <li>
+                  Insurance usually covers only the authorised problem — a separate concern may need
+                  a new authorisation.
+                </li>
+              </ul>
+              <Link className="text-link" href="/insurance">
+                Read the insurance guide <span aria-hidden="true">→</span>
+              </Link>
+            </div>
           </div>
-          <div className="info-prose">
-            <p>
-              You can pay for your care yourself (self-pay) or, if you have private medical
-              insurance, you may be able to claim through your insurer.
+        </div>
+      </section>
+
+      {/* Payment methods + cancellation */}
+      <section className="info-section">
+        <div className="container fee-two">
+          <div className="fee-block">
+            <span className="fee-tag">Payment methods</span>
+            <h2>How to pay</h2>
+            <p style={{ color: "#4b5064", lineHeight: 1.8 }}>
+              Payment is taken at your appointment. Please contact the clinic if you have any
+              questions about paying for your care, or would like an estimate before booking.
             </p>
-            <ul className="info-list">
-              <li>Self-pay patients receive a clear invoice and receipt</li>
-              <li>
-                Insured patients should check cover and obtain any pre-authorisation before their
-                appointment
-              </li>
-              <li>Deposits are not currently taken online</li>
-            </ul>
-            <div className="tbc-panel">
-              <strong>Accepted payment methods are being confirmed.</strong> Details of how to pay,
-              and which insurers can be billed, will be published here. See our{" "}
-              <Link href="/insurance">insurance page</Link> for more.
-            </div>
-            <p>
-              Please read our <Link href="/cancellation-policy">cancellation policy</Link> before
-              booking.
+            <p style={{ marginTop: "10px" }}>
+              <a href="tel:+447539578959" className="text-link">
+                Call +44 7539 578959
+              </a>
+            </p>
+          </div>
+          <div className="fee-block">
+            <span className="fee-tag">Cancellation</span>
+            <h2>Changing your appointment</h2>
+            <p style={{ color: "#4b5064", lineHeight: 1.8 }}>
+              We understand plans change. Please give as much notice as possible if you need to
+              cancel or rearrange, so we can offer the time to another patient.
+            </p>
+            <p style={{ marginTop: "10px" }}>
+              <Link className="text-link" href="/cancellation-policy">
+                Read the cancellation policy <span aria-hidden="true">→</span>
+              </Link>
             </p>
           </div>
         </div>

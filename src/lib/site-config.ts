@@ -72,7 +72,31 @@ export const TREATMENTS = [
   "Skin tag removal (acrochordon)",
 ] as const;
 
-/** Services offered — used by the fees page and the enquiry form. */
+/** Owner-confirmed consultation fees. Procedures are quoted after assessment. */
+export const FEES = [
+  {
+    name: "New consultation",
+    price: "£450",
+    note: "Your first appointment — full assessment, diagnosis and a plan.",
+  },
+  {
+    name: "Follow-up consultation",
+    price: "£250",
+    note: "Review of an existing treatment plan or condition.",
+  },
+  {
+    name: "Follow-up consultation (Alexandra Hospital, Manchester)",
+    price: "£300",
+    note: "Follow-up appointments at the Manchester location.",
+  },
+  {
+    name: "Procedures & treatments",
+    price: "Quoted after assessment",
+    note: "Costs depend on the treatment required and are always explained and agreed with you before anything goes ahead.",
+  },
+] as const;
+
+/** Services offered — used by the enquiry form. */
 export const SERVICES = [
   { slug: "mole-assessment", name: "Mole or skin lesion assessment", durationMinutes: 30 },
   { slug: "acne-rosacea", name: "Acne or rosacea consultation", durationMinutes: 30 },
