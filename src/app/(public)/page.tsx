@@ -30,6 +30,23 @@ const ROUTES = [
   { href: "/conditions/hair-scalp-nails", title: "Hair, scalp or nails?", cls: "route-card-c", icon: "❧" },
 ];
 
+const WHY = [
+  { icon: "✦", title: "Consultant-led care", body: "Every consultation is with Dr Vinod Elangasinghe himself — never delegated." },
+  { icon: "❤", title: "Adults & children", body: "Dermatology care for all ages, including paediatric skin, hair and nail concerns." },
+  { icon: "◉", title: "Mole & skin cancer expertise", body: "Careful assessment of moles and skin lesions, with prompt review where needed." },
+  { icon: "✎", title: "Clear plans, plainly explained", body: "You leave understanding what was found and what happens next — no jargon." },
+  { icon: "▷", title: "In-person & video", body: "Choose an in-person visit or a secure video consultation, whichever suits you." },
+  { icon: "⌖", title: "Sheffield & Manchester", body: "Consulting at Thornbury Hospital (Sheffield) and Alexandra Hospital (Manchester)." },
+];
+
+const STEPS = [
+  { n: "1", title: "Choose your appointment", body: "Pick the concern and appointment type that fit — for adults or children." },
+  { n: "2", title: "Send a request or call", body: "Complete the short request form, or call the clinic directly." },
+  { n: "3", title: "The clinic confirms", body: "We contact you to confirm the date, time and location that suit you." },
+  { n: "4", title: "Attend your consultation", body: "Meet Dr Elangasinghe in person or by video for a careful assessment." },
+  { n: "5", title: "Receive your plan", body: "Leave with a clear plan; letters and results follow once reviewed." },
+];
+
 export default async function HomePage() {
   const clinic = await getClinicInfo();
 
@@ -51,11 +68,18 @@ export default async function HomePage() {
             </p>
             <div className="circle-hero-actions">
               <Link className="button" href="/book">
-                Book an appointment <span aria-hidden="true">→</span>
+                Book appointment <span aria-hidden="true">→</span>
               </Link>
-              <Link className="text-link" href="/conditions">
-                Explore our care <span aria-hidden="true">↓</span>
-              </Link>
+              <a className="button button-outline" href={`tel:${clinic.phone?.replace(/\s+/g, "") ?? ""}`}>
+                Call clinic
+              </a>
+            </div>
+            <div className="hero-secondary-cta">
+              <Link href="/fees">Check fees</Link>
+              <i aria-hidden="true">·</i>
+              <Link href="/insurance">Using insurance?</Link>
+              <i aria-hidden="true">·</i>
+              <Link href="/conditions">Conditions we treat</Link>
             </div>
           </div>
 
@@ -89,6 +113,63 @@ export default async function HomePage() {
               <h3>{r.title}</h3>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* ── Why patients choose us ────────────────────────────────── */}
+      <section className="why-band">
+        <div className="container">
+          <div className="band-head">
+            <span className="eyebrow">
+              <span></span> Why patients choose us
+            </span>
+            <h2>
+              Considered care, <em>from a consultant you can trust.</em>
+            </h2>
+          </div>
+          <div className="why-grid">
+            {WHY.map((w) => (
+              <article key={w.title} className="why-card">
+                <span className="why-icon" aria-hidden="true">
+                  {w.icon}
+                </span>
+                <h3>{w.title}</h3>
+                <p>{w.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── How it works ──────────────────────────────────────────── */}
+      <section className="how-band">
+        <div className="container">
+          <div className="band-head">
+            <span className="eyebrow">
+              <span></span> How it works
+            </span>
+            <h2>
+              A simple path <em>to being seen.</em>
+            </h2>
+          </div>
+          <ol className="how-steps">
+            {STEPS.map((s) => (
+              <li key={s.n} className="how-step">
+                <span className="how-num" aria-hidden="true">
+                  {s.n}
+                </span>
+                <div>
+                  <h3>{s.title}</h3>
+                  <p>{s.body}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
+          <div className="how-cta">
+            <Link className="button" href="/book">
+              Book appointment <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 

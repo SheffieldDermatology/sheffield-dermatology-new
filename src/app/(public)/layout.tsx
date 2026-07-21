@@ -6,6 +6,7 @@ import SiteFooter from "@/components/public/SiteFooter";
 import CookieBanner from "@/components/public/CookieBanner";
 import RevealEffects from "@/components/public/RevealEffects";
 import StructuredData from "@/components/public/StructuredData";
+import MobileCTABar from "@/components/public/MobileCTABar";
 
 // Public pages render per request so owner-supplied details (phone, address,
 // fees) are always current once entered in the admin area.
@@ -23,6 +24,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
       <SiteFooter />
       <CookieBanner />
       <RevealEffects />
+      <MobileCTABar />
     </>
   );
 }
