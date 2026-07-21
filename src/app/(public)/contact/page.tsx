@@ -86,10 +86,6 @@ export default async function ContactPage() {
                   )}
                 </div>
               )}
-              <div>
-                <small>Opening hours</small>
-                <p>{clinic.openingHours ?? "To be confirmed"}</p>
-              </div>
             </div>
             <div className="tbc-panel">
               <strong>Some details are still being finalised.</strong> Contact details shown as

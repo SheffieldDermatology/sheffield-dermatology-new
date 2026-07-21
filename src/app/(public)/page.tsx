@@ -252,10 +252,6 @@ export default async function HomePage() {
                 <p>Sheffield — address to be confirmed</p>
               )}
             </div>
-            <div>
-              <small>Opening hours</small>
-              <p>{clinic.openingHours ?? "To be confirmed"}</p>
-            </div>
           </div>
         </div>
       </section>
