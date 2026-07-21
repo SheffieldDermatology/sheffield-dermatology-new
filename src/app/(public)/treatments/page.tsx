@@ -14,6 +14,9 @@ export default function TreatmentsPage() {
     <>
       <section className="page-hero">
         <div className="container">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span>Treatments</span>
+          </nav>
           <div className="eyebrow">
             <span></span> Treatments &amp; services
           </div>

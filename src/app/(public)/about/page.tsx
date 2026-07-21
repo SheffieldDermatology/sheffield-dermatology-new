@@ -23,6 +23,9 @@ export default function AboutPage() {
     <>
       <section className="page-hero">
         <div className="container">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span>About</span>
+          </nav>
           <div className="eyebrow">
             <span></span> Meet your dermatologist
           </div>

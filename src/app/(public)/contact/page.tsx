@@ -26,6 +26,9 @@ export default async function ContactPage() {
     <>
       <section className="page-hero">
         <div className="container">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span>Contact</span>
+          </nav>
           <div className="eyebrow">
             <span></span> Get in touch
           </div>
