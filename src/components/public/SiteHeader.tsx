@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import MobileNav from "./MobileNav";
+import PrimaryNav from "./PrimaryNav";
 import { getClinicInfo } from "@/lib/clinic-info";
 import logo from "../../../public/assets/sheffield-dermatology-logo.png";
 
@@ -65,31 +66,8 @@ export default async function SiteHeader() {
             </Link>
           </div>
 
-          {/* Primary navigation with dropdown */}
-          <nav className="site-nav" aria-label="Main navigation">
-            <Link href="/">Home</Link>
-            <div className="nav-item">
-              <button className="nav-trigger" type="button" aria-haspopup="true">
-                Conditions <span className="caret" aria-hidden="true"></span>
-              </button>
-              <div className="dropdown" role="menu">
-                {CONDITIONS.map((c) => (
-                  <Link key={c.href} href={c.href} role="menuitem">
-                    <span className="dot" aria-hidden="true">
-                      {c.icon}
-                    </span>
-                    {c.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-            <Link href="/about">About Dr Elangasinghe</Link>
-            <Link href="/fees">Fees</Link>
-            <Link href="/insurance">Insurance</Link>
-            <Link href="/patient-information">Patient information</Link>
-            <Link href="/faq">FAQs</Link>
-            <Link href="/contact">Contact</Link>
-          </nav>
+          {/* Primary navigation with dropdown + active highlighting */}
+          <PrimaryNav conditions={CONDITIONS} />
         </div>
       </header>
     </div>
