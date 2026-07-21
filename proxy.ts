@@ -9,7 +9,10 @@ import type { NextRequest } from "next/server";
 
 const SESSION_COOKIE = "sd_session";
 
-const SITE_ONLY = process.env.SITE_ONLY === "1" || process.env.SITE_ONLY === "true";
+const SITE_ONLY =
+  process.env.SITE_ONLY === "1" ||
+  process.env.SITE_ONLY === "true" ||
+  (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL);
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;

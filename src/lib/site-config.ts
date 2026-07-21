@@ -8,7 +8,12 @@
  *
  * All values below are owner-confirmed public business information.
  */
-export const SITE_ONLY = process.env.SITE_ONLY === "1" || process.env.SITE_ONLY === "true";
+export const SITE_ONLY =
+  process.env.SITE_ONLY === "1" ||
+  process.env.SITE_ONLY === "true" ||
+  // Safety default: in production with no database configured, run the lean
+  // public "info + enquiry" site rather than crashing on a missing DATABASE_URL.
+  (process.env.NODE_ENV === "production" && !process.env.DATABASE_URL);
 
 /** Inbox that booking enquiries and contact messages are emailed to. */
 export const CLINIC_INBOX = process.env.CLINIC_INBOX ?? "contact@sheffielddermatology.com";
